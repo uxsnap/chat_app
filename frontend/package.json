@@ -10,8 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "vue": "^2.6.11",
-    "vue-loader": "^15.9.1",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "react": "^16.13.1",
     "webpack": "^4.42.1"
   }
 }

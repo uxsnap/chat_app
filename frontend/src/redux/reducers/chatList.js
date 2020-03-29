@@ -1,4 +1,5 @@
-export default (state = [], action) => {
+export default (state = 
+  [], action) => {
   switch (action.type) {
     case 'ADD_DIALOGUE_ITEM':
       return [

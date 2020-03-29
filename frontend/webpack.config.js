@@ -4,7 +4,7 @@ module.exports = {
   entry: "./index.js",
   mode: "development",
   output: {
-    filename: "./main.js"
+    filename: "main.js"
   },
   devServer: {  
     contentBase: path.join(__dirname, "dist"),
@@ -18,7 +18,10 @@ module.exports = {
     alias: {
       'containers': path.resolve(__dirname, './src/containers'),
       'components': path.resolve(__dirname, './src/components'),
-      'reduxMain': path.resolve(__dirname, './src/redux')
+      'reduxMain': path.resolve(__dirname, './src/redux'),
+      'actions': path.resolve(__dirname, './src/redux/actions'),
+      'helpers': path.resolve(__dirname, './src/helpers'),
+      'services': path.resolve(__dirname, './src/services')
     },
   },
   module: {

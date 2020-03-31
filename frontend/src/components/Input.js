@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 
-const DefaultInput = ({ 
+export default ({ 
   type = 'text',
   value,
   title = '',
   error = '',
   placeholder = 'Input something...',
-  className=''
+  className = '',
+  onInput
 }) => {
   const [stateValue, setValue] = useState('');
   const id = name + 'Input';
@@ -18,7 +19,6 @@ const DefaultInput = ({
     'input_error': isError,
     [className]: true
   });
-  const 
   return (
     <label
       htmlFor={id}
@@ -33,10 +33,16 @@ const DefaultInput = ({
         name={name}
         id={id}
         placeholder={placeholder}
-        onInput={($event) => setValue($event.target.value)}
+        onInput={($event) => {
+          const { value } = $event.target;
+          setValue(value);
+          onInput(value)
+        }}
       />
-      {isError &&
-        <span className="input__error">{error}</span>}
+      {isError
+        ? <span className="input__error">{error}</span>
+        : ''
+      }
     </label>
   );
-} 
+}

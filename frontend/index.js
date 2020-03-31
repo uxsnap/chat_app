@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import regeneratorRuntime from "regenerator-runtime";
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from 'reduxMain/reducers';
 import App from 'containers/App';
+import './src/sass/index.sass';
 
 const composeEnhancers = window
   .__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ||

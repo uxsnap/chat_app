@@ -21,7 +21,8 @@ module.exports = {
       'reduxMain': path.resolve(__dirname, './src/redux'),
       'actions': path.resolve(__dirname, './src/redux/actions'),
       'helpers': path.resolve(__dirname, './src/helpers'),
-      'services': path.resolve(__dirname, './src/services')
+      'services': path.resolve(__dirname, './src/services'),
+      'images': path.resolve(__dirname, './src/images')
     },
   },
   module: {
@@ -36,6 +37,16 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: ["file-loader"]
+      },
+      {
+        test: /\.(sass|css)$/i,
+        use: [
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader'
+        ]
       }
     ]
   }

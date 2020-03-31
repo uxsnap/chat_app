@@ -1,19 +1,21 @@
-import styled from 'styled-components';
 import React from 'react';
+import classNames from 'classnames';
 
-const DefaultButton = ({ className, children, click }) => {
+export default ({ className, mod = '', children, onClick }) => {
+  const modClass = mod.length
+    ? `main-button_${mod}`
+    : '';
+  const buttonClasses = classNames({
+    'main-button': true,
+    [className]: true,
+    [modClass]: true
+  });
   return (
     <button 
-      className={className}
-      onClick={click}
+      className={buttonClasses}
+      onClick={onClick}
     >
       { children }
     </button>
   );
 }
-
-export const Button = styled(DefaultButton)`
-  background: transparent;
-  border: 0;
-  outline: none;
-`

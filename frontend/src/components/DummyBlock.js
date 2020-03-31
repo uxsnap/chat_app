@@ -1,6 +1,5 @@
 import React from 'react';
 import Icon from './Icon';
-import styled from 'styled-components';
 
 const DefaultDummyBlock = ({ icon, info }) => {
   return (

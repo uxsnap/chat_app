@@ -1,0 +1,38 @@
+.auth-form
+  position: absolute
+  top: 50%
+  left: 50%
+  font-family: 'Lato', sans-serif
+  transform: translate(-50%, -50%)
+  &__logo
+    width: 150px
+    height: 150px
+    transform: rotate(30deg)
+    margin: 0 auto
+    display: block
+  &__form
+    display: -webkit-flex
+    display: -moz-flex
+    display: -ms-flex
+    display: -o-flex
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-direction: column
+    width: 250px
+    & > *
+      width: 100% 
+      margin-top: 15px
+    label
+      input
+        width: 100%
+        margin-top: 10px
+        padding: 8px 10px
+        background-color: white
+        border: 1px solid $defaultColor
+        border-radius: 5px
+      & > *
+        display: flex
+        flex-direction: column
+
+

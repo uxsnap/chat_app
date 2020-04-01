@@ -11,10 +11,16 @@ export const updateField = (fieldType, value) => ({
   value
 });
 
+export const toggleSubmit = () => ({
+  type: 'TOGGLE_SUBMIT'
+});
+
 export const submitAuth = (formType) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    console.log('here');
     const { email, name, pass } = getState();
     const auth = new AuthService(email, name, pass);
-    return dispatch(auth[formType]());
+    return auth[formType]()
+      .then(() => dispatch(toggleSubmit()));
   }
 }

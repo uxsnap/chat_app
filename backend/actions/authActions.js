@@ -3,5 +3,5 @@ const {
 } = require('../resolvers/auth');
 
 module.exports = function(socket) {
-  socket.on('auth:login', handleLogin)
+  socket.on('auth:login', handleLogin);
 }

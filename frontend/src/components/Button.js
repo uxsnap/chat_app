@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const Button = ({ className = '', mod = '', children, onClick }) => {
+const Button = ({ className = '', mod = '', children, onClick, type = '' }) => {
   const modClass = mod.length
     ? `main-button_${mod}`
     : '';
@@ -12,7 +12,8 @@ const Button = ({ className = '', mod = '', children, onClick }) => {
     [modClass]: true
   });
   return (
-    <button 
+    <button
+      type={type}
       className={buttonClasses}
       onClick={onClick}
     >

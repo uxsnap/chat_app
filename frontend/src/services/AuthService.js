@@ -7,8 +7,8 @@ export default class {
     this.pass = '';
   }
 
-  login() {
-    return  socket.emit('auth:login', {
+  async login() {
+    return await socket.emit('auth:login', {
       params: {
         email: this.email,
         pass: this.pass
@@ -16,8 +16,8 @@ export default class {
     });
   } 
 
-  register() {
-    return socket.emit('auth:register', {
+  async register() {
+    return await socket.emit('auth:register', {
       params: {
         name: this.name,
         email: this.email,
@@ -26,8 +26,8 @@ export default class {
     });
   } 
 
-  forgotPass() {
-    return socket.emit('auth:forgotPass', {
+  async forgotPass() {
+    return await socket.emit('auth:forgotPass', {
       params: {
         email: this.email
       }

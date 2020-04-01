@@ -3,7 +3,6 @@ const http      = require('http');
 const session   = require('express-session');
 const { resolve } = require('path');
 const sessionMiddleware = require('./middleware/sessionMiddleware');
-
 const authActions = require('./actions/authActions');
 
 const app = express();

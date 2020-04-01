@@ -25,6 +25,11 @@ const AuthForm = ({
       <form
         className="auth-form__form"
         id="chatForm"
+        onSubmit={($event) => {
+          $event.preventDefault();
+          
+          submitAuth(formType);
+        }}
       >
       {formType === 'register' &&
         <Input
@@ -61,10 +66,7 @@ const AuthForm = ({
         <Button 
           className="auth-form__submit"
           mod="primary"
-          onClick={() => {
-            submitAuth(formType);
-            return false;
-          }}
+          type="submit"
         >Submit</Button>
       </form>
       <div className="auth-form__change-type">

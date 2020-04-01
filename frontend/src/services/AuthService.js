@@ -1,4 +1,4 @@
-import axiosClient from 'helpers/axiosClient';
+import socket from 'helpers/api';
 
 export default class {
   constructor(email = '', name = '', pass = '') {
@@ -7,8 +7,8 @@ export default class {
     this.pass = '';
   }
 
-  async login() {
-    return await axiosClient.get('auth/login', {
+  login() {
+    return  socket.emit('auth:login', {
       params: {
         email: this.email,
         pass: this.pass
@@ -16,8 +16,8 @@ export default class {
     });
   } 
 
-  async register() {
-    return await axiosClient.get('auth/register', {
+  register() {
+    return socket.emit('auth:register', {
       params: {
         name: this.name,
         email: this.email,
@@ -26,8 +26,8 @@ export default class {
     });
   } 
 
-  async forgotPass() {
-    return await axiosClient.get('auth/forgotPass', {
+  forgotPass() {
+    return socket.emit('auth:forgotPass', {
       params: {
         email: this.email
       }

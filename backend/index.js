@@ -1,8 +1,10 @@
 const express   = require('express');
-const http      = requrie('http');
+const http      = require('http');
 const session   = require('express-session');
 const { resolve } = require('path');
-const { config }  = require('./config.js');
+const sessionMiddleware = require('./middleware/sessionMiddleware');
+
+const authActions = require('./actions/authActions');
 
 const app = express();
 const server = http.Server(app);
@@ -10,12 +12,17 @@ const server = http.Server(app);
 // Socket implementation
 const io = require('socket.io')(server);
 
+// Socket config
+io.use((socket, next) => {
+  sessionMiddleware(socket.request, socket.request.res, next);
+});
+
 // Express configuration
 app.set('trust proxy', 1);
-app.use(session(config));
+app.use(sessionMiddleware);
 
-server.listen(3001)
-
-app.get('/', async (req, res) => {
-  res.sendFile(resolve(__dirname + './login.html'));
+io.on('connection', (socket) => {
+  authActions(socket);
 });
+
+server.listen(3001);

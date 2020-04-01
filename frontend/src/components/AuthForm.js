@@ -11,7 +11,8 @@ const AuthForm = ({
   mailError = '',
   passError = '',
   logo = '',
-  updateField 
+  updateField,
+  submitAuth
 }) => {
   const [formType, setFormType] = useState('login');
   return (
@@ -32,6 +33,7 @@ const AuthForm = ({
           title="Name: "
           value={name}
           error={nameError}
+          name="name"
           onInput={(value) => updateField('name', value)}
         />
       }  
@@ -41,6 +43,7 @@ const AuthForm = ({
           title="Email: "
           value={email}
           error={mailError}
+          name="email"
           onInput={(value) => updateField('email', value)}
         />
       {formType !== 'forgotPass' &&
@@ -50,15 +53,27 @@ const AuthForm = ({
           title="Password: "
           value={pass}
           error={passError}
+          type="password"
+          name="pass"
           onInput={(value) => updateField('pass', value)}
         />
       }
         <Button 
           className="auth-form__submit"
           mod="primary"
+          onClick={() => {
+            submitAuth(formType);
+            return false;
+          }}
         >Submit</Button>
       </form>
       <div className="auth-form__change-type">
+        {formType !== 'login' &&
+          <Button mod="inverse" onClick={() => setFormType('login')}>Login</Button>}
+        {formType !== 'register' &&
+          <Button mod="inverse" onClick={() => setFormType('register')}>Register</Button>}
+        {formType !== 'forgotPass' &&
+          <Button mod="inverse" onClick={() => setFormType('forgotPass')}>Forgot password</Button>}
       </div>
     </div>
   );
@@ -72,7 +87,8 @@ AuthForm.propTypes = {
   nameError: PropTypes.string,
   mailError: PropTypes.string,
   passError: PropTypes.string,
-  updateField: PropTypes.func.isRequired
+  updateField: PropTypes.func.isRequired,
+  submitAuth: PropTypes.func.isRequired
 };
 
 export default AuthForm;

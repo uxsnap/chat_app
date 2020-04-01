@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-export default ({ className, mod = '', children, onClick }) => {
+const Button = ({ className = '', mod = '', children, onClick }) => {
   const modClass = mod.length
     ? `main-button_${mod}`
     : '';
@@ -19,3 +20,11 @@ export default ({ className, mod = '', children, onClick }) => {
     </button>
   );
 }
+
+Button.propTypes = {
+  className: PropTypes.string,
+  mod: PropTypes.string,
+  onClick: PropTypes.func
+};
+
+export default Button;

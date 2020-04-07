@@ -1,20 +1,32 @@
-import React, { useState } from 'react';
+import React, {
+  useState,
+  useEffect
+} from 'react';
 import PropTypes from 'prop-types';
 import Input from 'components/Input';
 import Button from 'components/Button';
 
 const AuthForm = ({
+  socket,
   name = '',
   email = '',
   pass = '',
-  nameError = '',
-  mailError = '',
-  passError = '',
   logo = '',
+  error = '',
   updateField,
-  submitAuth
+  submitAuth,
+  toggleLogged
 }) => {
   const [formType, setFormType] = useState('login');
+
+  useEffect(() => {
+    socket.on('auth:submitted', (data) => {
+      const { res, type } = JSON.parse(data);
+      if (type === 'LOGIN' && res.status === 200)
+        toggleLogged(true);
+    });
+  }, []);
+
   return (
     <div className="auth-form">
       <img
@@ -37,7 +49,7 @@ const AuthForm = ({
           placeholder="Input your name"
           title="Name: "
           value={name}
-          error={nameError}
+          error={''}
           name="name"
           onInput={(value) => updateField('name', value)}
         />
@@ -47,7 +59,7 @@ const AuthForm = ({
           placeholder="Input your email"
           title="Email: "
           value={email}
-          error={mailError}
+          error={''}
           name="email"
           onInput={(value) => updateField('email', value)}
         />
@@ -57,7 +69,7 @@ const AuthForm = ({
           placeholder="Input your password"
           title="Password: "
           value={pass}
-          error={passError}
+          error={''}
           type="password"
           name="pass"
           onInput={(value) => updateField('pass', value)}

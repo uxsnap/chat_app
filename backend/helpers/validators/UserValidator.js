@@ -1,15 +1,10 @@
 class UserValidator {
-  
   validateEmail(email) {
-    if (!email.length && !email.includes('@'))
-      return {
-        status: 500,
-        message: 'Email is incorrect.'
-      }
+    const check = email.length && email.includes('@');
     return {
-      status: 200,
-      message: ''
-    }
+       status: check ? 200 : 500,
+       message: check ? '' : 'Email is incorrect'
+    } 
   }
 
   validateName(name) {

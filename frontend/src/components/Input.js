@@ -8,6 +8,7 @@ export default ({
   error = '',
   placeholder = 'Input something...',
   className = '',
+  name,
   onInput
 }) => {
   const [stateValue, setValue] = useState('');

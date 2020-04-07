@@ -15,10 +15,10 @@ export const toggleSubmit = () => ({
   type: 'TOGGLE_SUBMIT'
 });
 
+
 export const submitAuth = (formType) => {
   return (dispatch, getState) => {
-    console.log('here');
-    const { email, name, pass } = getState();
+    const { email, name, pass } = getState().authForm;
     const auth = new AuthService(email, name, pass);
     return auth[formType]()
       .then(() => dispatch(toggleSubmit()));

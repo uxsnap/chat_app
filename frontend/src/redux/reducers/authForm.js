@@ -12,7 +12,7 @@ export default (state = {
         isLogged: action.logged
       }
     case 'UPDATE_FIELD':
-    const { fieldType, value } = action;
+      const { fieldType, value } = action;
       return {
         ...state,
         [fieldType]: value.trim()
@@ -20,7 +20,6 @@ export default (state = {
     case 'TOGGLE_SUBMIT':
       return {
         ...state,
-        isSubmit: !state.isSubmit
       } 
     default:
       return state;

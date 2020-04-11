@@ -8,10 +8,16 @@ module.exports = function(socket) {
   socket.on('auth:login', async (data) => {
     const { email, pass } = JSON.parse(data);
     const res = await handleLogin(email, pass);
-    const { _id } = res; 
-    if (_id) socket.request.session.userId = _id;
-    console.log(socket.request.session);
-    // socket.emit('auth:submitted', JSON.stringify(res));
+    const { _id } = res;
+    if (_id) {
+      socket.request.session._id = _id;
+      socket.request.session.save((err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+    socket.emit('auth:submitted', JSON.stringify(res));
   });
 
   socket.on('auth:register', async (data) => {
@@ -20,5 +26,9 @@ module.exports = function(socket) {
     socket.emit('auth:submitted', JSON.stringify(res));
   });
 
-  socket.on('auth:forgotPass', handleForgotPass);
+  socket.on('auth:forgotPass', async (data) => {
+    const { email } = JSON.parse(data);
+    const res = await handleForgotPass(email);
+    socket.emit('auth:submitted', JSON.stringify(res));
+  });
 }

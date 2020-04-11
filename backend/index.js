@@ -30,7 +30,6 @@ io.use((socket, next) => {
 });
 
 // Express configuration
-app.set('trust proxy', 1);
 app.use(sessionMiddleware);
 
 io.on('connection', (socket) => {
@@ -53,6 +52,6 @@ mongoose
   )
   .then(() => {
     console.log('Connected to MONGO');
-    server.listen(3001, () => console.log('listening.'));
+    server.listen(process.env.PORT, () => console.log('listening.'));
   })
   .catch(err => console.log(err));

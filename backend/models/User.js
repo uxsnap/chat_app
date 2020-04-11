@@ -6,7 +6,9 @@ const { model, Schema } = require('mongoose');
 const UserSchema = new Schema({
   name: String,
   email: String,
-  pass: String
+  pass: String,
+  resetPassToken: String,
+  resetPassExpires: Date
 });
 
 UserSchema.statics.findByEmail = async function(email) {

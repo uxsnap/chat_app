@@ -32,5 +32,13 @@ export default class {
         email: this.email
       })
     );
-  } 
+  }
+
+  async changePass() {
+    return await socket.emit('auth:changePass', 
+      JSON.stringify({
+        pass: this.pass
+      })
+    );
+  }
 }

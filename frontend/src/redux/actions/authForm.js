@@ -15,6 +15,20 @@ export const toggleSubmit = () => ({
   type: 'TOGGLE_SUBMIT'
 });
 
+export const changeAuthType = (value) => ({
+  type: 'CHANGE_TYPE',
+  value
+}) 
+
+export const handleNewPass = (password) => {
+  return (dispatch) => {
+    const auth = new AuthService(null, null, pass);
+    return auth.changePass()
+      .then(() => dispatch(
+        updateField('pass', password)
+      )) 
+  }
+};
 
 export const submitAuth = (formType) => {
   return (dispatch, getState) => {

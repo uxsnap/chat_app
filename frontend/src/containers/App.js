@@ -9,7 +9,7 @@ import Chat from 'containers/Chat';
 const App = ({ isLogged }) => {
   if (isLogged)
     return <Chat />;
-  return <VisibleAuthForm />;
+  return <Authenfication />;
 }
 
 const mapState = state => ({ 

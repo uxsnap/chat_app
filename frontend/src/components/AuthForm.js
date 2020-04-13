@@ -32,7 +32,7 @@ const AuthForm = ({
       <img
         src={logo}
         alt="Main logo"
-        className="auth-form__logo"
+        className="auth-form__logo main-logo"
       />
       <form
         className="auth-form__form"

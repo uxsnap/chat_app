@@ -3,7 +3,8 @@ export default (state = {
   name: '',
   email: '',
   pass: '',
-  isSubmit: false
+  isSubmit: false,
+  type: 'form'
 }, action) => {
   switch (action.type) {
     case 'TOGGLE_LOGGED':
@@ -21,6 +22,11 @@ export default (state = {
       return {
         ...state,
       } 
+    case 'CHANGE_TYPE':
+      return {
+        ...state,
+        type: action.value
+      }
     default:
       return state;
   }

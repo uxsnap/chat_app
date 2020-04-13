@@ -1,14 +1,11 @@
 import React from 'react';
 
-const DefaultActionList = ({children}) => {
+export default ({children}) => {
   return (
     <ul className="action-list">
       {...children}
     </ul>
   );
 }
-
-
-export ActionList = styled(DefaultActionList)``;
 
 

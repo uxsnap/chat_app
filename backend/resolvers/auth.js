@@ -1,8 +1,9 @@
 const User = require('../models/User');
 const UserValidator = require('../helpers/validators/UserValidator');
 const bcrypt = require('bcrypt');
-const crypto = requrie('crypto');
-const smtp = require('smtp');
+const crypto = require('crypto');
+const sgMail = require('../helpers/sgMail');
+// const smtp = require('../helpers/smtp');
 
 async function handleLogin(email, pass) {
   const validator = new UserValidator();
@@ -124,7 +125,7 @@ async function handleForgotPass(email) {
     return res;
 
   try {
-    const found = User.findByEmail(email);
+    const found = await User.findByEmail(email);
 
     if (!found) {
       res.status = 500;
@@ -159,26 +160,22 @@ async function handleForgotPass(email) {
 
       const mailData = {
         to: found.email,
-        from: url,
-        template: 'forgot-password-email',
+        // Just testing - ya know
+        from: 'test@mail.com',
         subject: 'Password help has arrived!',
-        context: {
-          url: `${url}/auth/reset_password?token=${token}`,
-          name: found.name.split(' ')[0]
-        }
+        text: 'and easy to do anywhere, even with Node.js',
+        html: `<a href="${url}/reset_password?token=${token}">Your link!</a>`,
+        // to: 'test@example.com',
+        // from: 'test@example.com',
+        // subject: 'Sending with Twilio SendGrid is Fun',
+        // text: 'and easy to do anywhere, even with Node.js',
+        // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
       };
 
-      smtp(
-        process.env.MAIL_SERVICE_USER,
-        process.env.MAIL_SERVICE_PASS
-      ).sendMail(data, (err) => {
-        if (err) {
-          res.status = 500;
-          res.message = 'Error occured.'
-        }
-      });
+      await sgMail.send(mailData);
     }
   } catch (e) {
+    console.log(e);
     res.status = 500;
     res.message = 'Error occured when checking user is in db';
   }

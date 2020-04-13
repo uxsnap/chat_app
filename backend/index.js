@@ -42,6 +42,7 @@ const connectStr = 'mongodb+srv://' +
   '@chatapp-pumsp.mongodb.net/test' +
   '?retryWrites=true&w=majority';
 
+mongoose.set('useFindAndModify', false);
 mongoose
   .connect(
     connectStr,

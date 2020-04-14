@@ -1,14 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from './Button';
 import Input from './Input';
+import { useHistory } from 'react-router-dom'; 
 
 export default ({
+  token = null,
   title = '',
   logo = '',
   error = '',
-  handleNewPass
+  handleNewPass,
+  socket
 }) => {
   const [newPass, setNewPass] = useState('');
+  const history = useHistory();
+
+  useEffect(() => {
+    socket.on('auth:passChanged', (data) => {
+      const { res, type } = JSON.parse(data);
+      if (type === 'PASS_CHANGED' &&
+        res.status === 200)
+        history.push('/auth');
+    });
+  }, []);
 
   return (
     <div className="reset-pass">
@@ -30,7 +43,7 @@ export default ({
       </div>
       <div className="reset-pass__button">
         <Button
-          onClick={() => handleNewPass(newPass)}
+          onClick={() => handleNewPass(token, newPass)}
         >Change Pass</Button>
       </div>
     </div>

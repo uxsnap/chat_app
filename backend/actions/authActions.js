@@ -1,10 +1,12 @@
 const { 
   handleLogin,
   handleReg,
-  handleForgotPass
+  handleForgotPass,
+  handleChangePass
 } = require('../resolvers/auth');
 
 module.exports = function(socket) {
+
   socket.on('auth:login', async (data) => {
     const { email, pass } = JSON.parse(data);
     const res = await handleLogin(email, pass);
@@ -30,5 +32,11 @@ module.exports = function(socket) {
     const { email } = JSON.parse(data);
     const res = await handleForgotPass(email);
     socket.emit('auth:submitted', JSON.stringify(res));
+  });
+
+  socket.on('auth:changePass', async (data) => {
+    const { token, pass } = JSON.parse(data);
+    const res = await handleChangePass(token, pass);
+    socket.emit('auth:passChanged', JSON.stringify(res));
   });
 }

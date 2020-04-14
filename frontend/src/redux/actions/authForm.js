@@ -1,10 +1,5 @@
 import AuthService from 'services/AuthService';
 
-export const toggleLogged = logged => ({
-  type: 'TOGGLE_LOGGED',
-  logged
-});
-
 export const updateField = (fieldType, value) => ({
   type: 'UPDATE_FIELD',
   fieldType,
@@ -18,17 +13,32 @@ export const toggleSubmit = () => ({
 export const changeAuthType = (value) => ({
   type: 'CHANGE_TYPE',
   value
-}) 
+});
 
-export const handleNewPass = (password) => {
+export const setFormType = (formType) => ({
+  type: 'FORM_TYPE',
+  formType
+});
+
+export const handleNewPass = (token, password) => {
   return (dispatch) => {
     const auth = new AuthService(null, null, pass);
-    return auth.changePass()
+    return auth.changePass(token)
       .then(() => dispatch(
         updateField('pass', password)
       )) 
   }
 };
+
+export const handleAuthAction = (authType) => ({
+  type: 'AUTH_ACTION',
+  authType
+});
+
+export const setError = (message) => ({
+  type: 'SET_ERROR',
+  message
+});
 
 export const submitAuth = (formType) => {
   return (dispatch, getState) => {

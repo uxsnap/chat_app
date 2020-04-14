@@ -4,10 +4,12 @@ import {
 } from 'actions/authForm';
 import mainLogo from 'images/mainLogo.svg';
 import ResetPass from 'components/ResetPass';
+import socket from 'helpers/api';
 
 const mapStateToProps = state => {
   const { resetPassTitle } = state.authForm;
   return {
+    socket,
     logo: mainLogo,
     title: resetPassTitle
   }

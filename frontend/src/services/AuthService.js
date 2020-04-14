@@ -34,9 +34,10 @@ export default class {
     );
   }
 
-  async changePass() {
+  async changePass(token) {
     return await socket.emit('auth:changePass', 
       JSON.stringify({
+        token,
         pass: this.pass
       })
     );

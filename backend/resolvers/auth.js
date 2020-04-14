@@ -111,18 +111,16 @@ async function handleReg(name, email, pass) {
 async function handleForgotPass(email) {
   const validator = new UserValidator();
 
-  const values = [
-    {field: email, func: validator.validateEmail},
-  ];
-
   const responseObject = {
     res: null,
     type: 'FORGOT_PASS'
   };
 
   let res = validator.validateEmail(email);
-  if (res.status !== 200)
-    return res;
+  if (res.status !== 200) {
+    responseObject.res = res;
+    return responseObject;
+  }
 
   try {
     const found = await User.findByEmail(email);
@@ -185,6 +183,54 @@ async function handleForgotPass(email) {
   return responseObject;
 }
 
+async function handleChangePass(token, pass) {
+  const validator = new UserValidator();
+
+   const responseObject = {
+    res: null,
+    type: 'CHANGE_PASS'
+  };
+
+  let res = validator.validatePass(pass);
+
+  if (res.status !== 200) {
+    responseObject.res = res;
+    return responseObject;
+  }
+
+  try {
+    const found = await User.find({ resetPassToken: token });
+
+    if (!found) {
+      console.log(e);
+      res.status = 500;
+      res.message = 'Error occured when checking user is in db';
+    } else {
+      const passHashed = await bcrypt.hash(
+        pass,
+        10 // Salt rounds
+      );
+      await User.updateOne(
+        { resetPassToken: token },
+        { 
+          pass: passHashed,
+          resetPassToken: null,
+          resetPassExpires: null
+        }
+      );
+    }
+  } catch (e) {
+    console.log(e);
+    res.status = 500;
+    res.message = 'Error occured when checking user is in db';
+  }
+
+  responseObject.res =res;
+
+  return responseObject;
+}
+
 module.exports.handleLogin = handleLogin;
 module.exports.handleReg = handleReg;
 module.exports.handleForgotPass = handleForgotPass;
+module.exports.handleChangePass = handleChangePass;

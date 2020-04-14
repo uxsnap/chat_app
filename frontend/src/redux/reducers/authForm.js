@@ -4,14 +4,10 @@ export default (state = {
   email: '',
   pass: '',
   isSubmit: false,
+  formType: 'login',
   type: 'form'
 }, action) => {
   switch (action.type) {
-    case 'TOGGLE_LOGGED':
-      return {
-        ...state,
-        isLogged: action.logged
-      }
     case 'UPDATE_FIELD':
       const { fieldType, value } = action;
       return {
@@ -26,6 +22,25 @@ export default (state = {
       return {
         ...state,
         type: action.value
+      }
+    case 'AUTH_ACTION':
+      switch (action.authType) {
+        case 'LOGIN':
+          return {
+            ...state,
+            isLogged: true
+          }
+        case 'REGISTRATION':
+        case 'FORGOT_PASS':
+          return {
+            ...state,
+            formType: 'login'
+          }
+      }
+    case 'SET_ERROR':
+      return {
+        ...state,
+        error: action.message
       }
     default:
       return state;

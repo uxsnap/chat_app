@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import rootReducer from 'reduxMain/reducers';
 import App from 'containers/App';
 import './src/sass/index.sass';
+import { BrowserRouter } from 'react-router-dom'; 
 
 const composeEnhancers = window
   .__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ||
@@ -20,7 +21,9 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App/>
+    <BrowserRouter>
+      <App/>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('app')
 );

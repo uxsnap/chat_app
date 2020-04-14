@@ -13,17 +13,21 @@ const AuthForm = ({
   pass = '',
   logo = '',
   error = '',
+  formType = 'login',
   updateField,
   submitAuth,
-  toggleLogged
+  handleAuthAction,
+  setError,
+  setFormType
 }) => {
-  const [formType, setFormType] = useState('login');
-
   useEffect(() => {
     socket.on('auth:submitted', (data) => {
       const { res, type } = JSON.parse(data);
-      if (type === 'LOGIN' && res.status === 200)
-        toggleLogged(true);
+      if (res.status !== 200) {
+        setError(res.message);
+        return;
+      }
+      handleAuthAction(type);
     });
   }, []);
 

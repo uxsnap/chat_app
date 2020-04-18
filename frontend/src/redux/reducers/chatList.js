@@ -1,25 +1,36 @@
+const initialState = {
+  dialogues: [],
+  currentDialogue: '',
+  searchValue: ''
+};
+
 export default (state = 
-  [], action) => {
+  initialState, action) => {
   switch (action.type) {
-    case 'ADD_DIALOGUE_ITEM':
-      return [
+    case 'SET_SEARCH_VALUE':
+      return {
         ...state,
-        { 
-          id: action.id,
-          photo: action.photo,
-          title: action.title,
-          message: action.message,
-          isActive: false
-        }
-      ]
+        searchValue: action.value
+      }
+    case 'ADD_DIALOGUE_ITEM':
+      return {
+        ...state,
+        dialogues: [
+          ...state.dialogues,
+          { 
+            id: action.id,
+            photo: action.photo,
+            title: action.title,
+            message: action.message,
+          }
+        ] 
+      }
     case 'REMOVE_DIALOGUE_ITEM':
       return state.filter(
         item => item.id !== action.id
       )
     case 'SET_DIALOGUE_ACTIVE':
-      return state.map(
-        item => ({ ...item, isActive: item.id === action.id})
-      );
+      return { ...state, currentDialogue: action.id } 
     default:
       return state;
   }

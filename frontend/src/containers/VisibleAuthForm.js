@@ -9,7 +9,7 @@ import mainLogo from 'images/mainLogo.svg';
 import socket from 'helpers/api';
 
 const mapStateToProps = state => {
-  const { name, email, pass} = state.authForm;
+  const { name, email, pass } = state.authForm;
   return {
     socket,
     logo: mainLogo,

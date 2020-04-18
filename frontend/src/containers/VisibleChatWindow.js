@@ -1,3 +1,3 @@
 import React, { useState } from 'react';
 
-const ChatWindow = ({}) => {}
+export default () => <h1>Hello</h1>;

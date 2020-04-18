@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
+import Icon from 'components/Icon';
 
 export default ({ 
   type = 'text',
@@ -8,10 +9,11 @@ export default ({
   error = '',
   placeholder = 'Input something...',
   className = '',
+  icon = '',
   name,
   onInput
 }) => {
-  const [stateValue, setValue] = useState('');
+  const [stateValue, setValue] = useState(value || '');
   const id = name + 'Input';
   const isError = error.length;
   "input" + (isError ? 'input_error' : '')
@@ -25,8 +27,9 @@ export default ({
       htmlFor={id}
       className={labelClasses}
     >
-      {title.length &&
+      {title.length ?
         <span className="input__title">{title}</span>
+        : ''
       }
       <input
         className="input__input"
@@ -34,12 +37,16 @@ export default ({
         name={name}
         id={id}
         placeholder={placeholder}
-        onInput={($event) => {
-          const { value } = $event.target;
-          setValue(value);
-          onInput(value)
+        onChange={($event) => {
+          const curValue = $event.target.value;
+          setValue(curValue);
+          onInput(curValue)
         }}
       />
+      {icon.length
+        ? <span className="input__icon"><Icon name={icon}/></span>
+        : ''
+      }
       {isError
         ? <span className="input__error">{error}</span>
         : ''

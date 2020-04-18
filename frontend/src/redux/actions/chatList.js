@@ -1,14 +1,16 @@
-let chatListId = 0;
+import { v4 as uuidv4 } from 'uuid';
 
 export const addDialogueItem = ({
   photo,
-  title,
+  name,
+  date,
   lastMessage
 }) => ({
   type: 'ADD_DIALOGUE_ITEM',
-  id: chatListId++,
+  id: uuidv4(),
   photo,
-  title,
+  name,
+  date,
   message: lastMessage
 });
 
@@ -17,11 +19,18 @@ export const removeDialogueItem = ({
 }) => ({
   type: 'REMOVE_DIALOGUE_ITEM',
   id
-})
+});
 
-export const setDialogueActive = ({
+export const chooseMessage = ({
   id
 }) => ({
   type: 'SET_DIALOGUE_ACTIVE',
   id
-})
+});
+
+export const setSearchValue = ({
+  value
+}) => ({
+  type: "SET_SEARCH_VALUE",
+  value
+});

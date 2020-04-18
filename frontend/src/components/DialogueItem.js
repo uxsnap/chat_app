@@ -1,13 +1,25 @@
 import React from 'react';
+import classNames from 'classnames';
 
-const DefaultDialogueItem = ({
-    modification = '',
-    photo = 'img/default_photo.png',
-    title,
-    lastMessage
-  }) => {
+export default ({
+  modification = '',
+  photo = 'img/default_photo.png',
+  title,
+  isActive,
+  lastMessage,
+  onClick
+}) => {
+  const dialogueClassnames = classNames({
+    'dialogue-item': true,
+    [modification]: true,
+    'dialogue-item_active': isActive
+  });
+
   return (
-    <div className={`dialogue-item ${modification.length ? `dialogue-item_${modification}` : ''}`}>
+    <div
+      className={dialogueClassnames}
+      onClick={onClick}
+    >
       <div className="dialogue-item__photo">
         <img src={photo} alt="Photo"/>
       </div>
@@ -24,10 +36,3 @@ const DefaultDialogueItem = ({
     </div>
   );
 }
-
-export const DialogueItem = styled(DefaultDialogueItem)`
-  background: transparent;
-  border: 1px solid black;
-  display: flex;
-`
-

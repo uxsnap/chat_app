@@ -41,6 +41,11 @@ module.exports = {
         use: ["file-loader"]
       },
       {
+        test: /\.(jpe|jpg|woff|woff2|eot|ttf|svg)$/,
+        exclude: /node_modules/,
+        loader: 'url-loader?importLoaders=1&limit=100000'
+      },
+      {
         test: /\.(sass|css)$/i,
         use: [
           'style-loader',

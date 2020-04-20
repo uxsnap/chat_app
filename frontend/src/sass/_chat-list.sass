@@ -1,5 +1,38 @@
 .chat-list
+  display: -webkit-flex
+  display: -moz-flex
+  display: -ms-flex
+  display: -o-flex
+  display: flex
+  flex-direction: column
+  &__main
+    flex-grow: 1
+    display: -webkit-flex
+    display: -moz-flex
+    display: -ms-flex
+    display: -o-flex
+    display: flex
+    flex-direction: column
   &__input
     input
       border: 1px solid $defaultColor
       padding: 8px 12px
+      width: 100%
+  &-empty
+    align-self: center
+    margin-top: auto
+    margin-bottom: auto
+    display: flex
+    align-items: center
+    flex-direction: column
+    .icon
+      text-align: center
+      font-size: 60px
+      color: $mainColor
+    &__message
+      color: $mainColor
+      margin-top: 25px
+      font-size: 25px
+  // &__main
+  //   & > *
+  //     margin-top: 15px

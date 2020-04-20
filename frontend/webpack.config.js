@@ -24,7 +24,8 @@ module.exports = {
       'actions': path.resolve(__dirname, './src/redux/actions'),
       'helpers': path.resolve(__dirname, './src/helpers'),
       'services': path.resolve(__dirname, './src/services'),
-      'images': path.resolve(__dirname, './src/images')
+      'images': path.resolve(__dirname, './src/images'),
+      'assets': path.resolve(__dirname, './src/assets')
     },
   },
   module: {

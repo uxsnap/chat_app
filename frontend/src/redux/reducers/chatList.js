@@ -1,5 +1,15 @@
+import mario from 'assets/images/mario.png';
+
 const initialState = {
-  dialogues: [],
+  dialogues: [
+    // {
+    //   id: 1,
+    //   name: 'me',
+    //   photo: mario,
+    //   date: new Date(),
+    //   message: 'Hello'
+    // }
+  ],
   currentDialogue: '',
   searchValue: ''
 };
@@ -21,6 +31,7 @@ export default (state =
             id: action.id,
             photo: action.photo,
             title: action.title,
+            date: action.date,
             message: action.message,
           }
         ] 

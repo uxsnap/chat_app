@@ -5,6 +5,7 @@ export default ({
   modification = '',
   photo = 'img/default_photo.png',
   title,
+  subtitle = '',
   isActive,
   lastMessage,
   onClick
@@ -23,12 +24,16 @@ export default ({
       <div className="dialogue-item__photo">
         <img src={photo} alt="Photo"/>
       </div>
-      <header className="dialogue-item__header">
-        <h1 className="dialogue-item__title">
-          { title }
-        </h1>
-      </header>
       <main className="dialogue-item__main">
+        <header className="dialogue-item__header">
+          <h1 className="dialogue-item__title">
+            { title }
+          </h1>
+          {subtitle.length
+            ? <h2 className="dialogue-item__subtitle">{subtitle}</h2>
+            : ''
+          }
+        </header>
         <p className="dialogue-item__last-message">
           { lastMessage }
         </p>

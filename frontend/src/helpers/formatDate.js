@@ -1,8 +1,8 @@
-export default ({ name, date }) => {
+export default (date) => {
   const [year, month, day] = [
     date.getFullYear(),
     date.getMonth(),
     date.getDate()
   ]
-  return `${name} ${year}-${month}-${day}`;
+  return `${year}-${month}-${day}`;
 }

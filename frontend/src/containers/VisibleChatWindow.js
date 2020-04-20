@@ -1,3 +1,4 @@
-import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import ChatWindow from 'components/ChatWIndow';
 
-export default () => <h1>Hello</h1>;
+export default connect()(ChatWindow);

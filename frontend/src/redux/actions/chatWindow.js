@@ -1,6 +1,5 @@
-export const addMessage = (dialogueId, text) => ({
-  type: "ADD_MESSAGE",
+export const handleSearch = (dialogueId, text) => ({
+  type: "HANDLE_SEARCH",
   dialogueId,
   text
 });
-

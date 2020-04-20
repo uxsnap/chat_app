@@ -1,17 +1,18 @@
 import React from 'react';
-import { DialogueItem } from './DialogueItem';
+import DialogueItem from './DialogueItem';
 
-const DefaultMessage = ({ children, photo, title }) => {
+export default ({
+  message
+}) => {
   return (
     <div className="message">
       <DialogueItem
         modification="message"
-        photo={photo}
-        title={title}
-        lastMessage={children}
+        photo={message.photo}
+        name={message.name}
+        date={message.date}
+        lastMessage={message.message}
       />
     </div>
   );
 }
-
-export const Message = styled(DefaultMessage)``;

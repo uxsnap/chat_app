@@ -6,12 +6,12 @@ import {
 import AuthService from 'services/AuthService';
 import AuthForm from 'components/AuthForm';
 import mainLogo from 'images/mainLogo.svg';
-import socket from 'helpers/api';
+import authSocket from 'helpers/constants/authSocket';
 
 const mapStateToProps = state => {
   const { name, email, pass } = state.authForm;
   return {
-    socket,
+    socket: authSocket,
     logo: mainLogo,
     name,
     email,

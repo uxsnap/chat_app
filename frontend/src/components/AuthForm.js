@@ -1,5 +1,4 @@
 import React, {
-  useState,
   useEffect
 } from 'react';
 import PropTypes from 'prop-types';
@@ -21,7 +20,7 @@ const AuthForm = ({
   setFormType
 }) => {
   useEffect(() => {
-    socket.on('auth:submitted', (data) => {
+    socket.on('submitted', (data) => {
       const { res, type } = JSON.parse(data);
       if (res.status !== 200) {
         setError(res.message);

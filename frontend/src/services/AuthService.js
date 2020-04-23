@@ -1,14 +1,15 @@
-import socket from 'helpers/api';
+import authSocket from 'helpers/constants/authSocket';
 
 export default class {
   constructor(email, name, pass) {
+    this.socket = authSocket;
     this.name = name;
     this.email = email;
     this.pass = pass;
   }
 
   async login() {
-    return await socket.emit('auth:login',
+    return await this.socket.emit('login',
       JSON.stringify({
         email: this.email,
         pass: this.pass
@@ -17,7 +18,7 @@ export default class {
   } 
 
   async register() {
-    return await socket.emit('auth:register',
+    return await this.socket.emit('register',
       JSON.stringify({
         name: this.name,
         email: this.email,
@@ -27,7 +28,7 @@ export default class {
   } 
 
   async forgotPass() {
-    return await socket.emit('auth:forgotPass',
+    return await this.socket.emit('forgotPass',
       JSON.stringify({
         email: this.email
       })
@@ -35,7 +36,7 @@ export default class {
   }
 
   async changePass(token) {
-    return await socket.emit('auth:changePass', 
+    return await this.socket.emit('changePass', 
       JSON.stringify({
         token,
         pass: this.pass

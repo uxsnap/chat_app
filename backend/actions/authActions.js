@@ -6,8 +6,7 @@ const {
 } = require('../resolvers/auth');
 
 module.exports = function(socket) {
-
-  socket.on('auth:login', async (data) => {
+  socket.on('login', async (data) => {
     const { email, pass } = JSON.parse(data);
     const res = await handleLogin(email, pass);
     const { _id } = res;
@@ -19,24 +18,24 @@ module.exports = function(socket) {
         }
       });
     }
-    socket.emit('auth:submitted', JSON.stringify(res));
+    socket.emit('submitted', JSON.stringify(res));
   });
 
-  socket.on('auth:register', async (data) => {
+  socket.on('register', async (data) => {
     const { name, email, pass } = JSON.parse(data);
     const res = await handleReg(name, email, pass);
-    socket.emit('auth:submitted', JSON.stringify(res));
+    socket.emit('submitted', JSON.stringify(res));
   });
 
-  socket.on('auth:forgotPass', async (data) => {
+  socket.on('forgotPass', async (data) => {
     const { email } = JSON.parse(data);
     const res = await handleForgotPass(email);
-    socket.emit('auth:submitted', JSON.stringify(res));
+    socket.emit('submitted', JSON.stringify(res));
   });
 
-  socket.on('auth:changePass', async (data) => {
+  socket.on('changePass', async (data) => {
     const { token, pass } = JSON.parse(data);
     const res = await handleChangePass(token, pass);
-    socket.emit('auth:passChanged', JSON.stringify(res));
+    socket.emit('passChanged', JSON.stringify(res));
   });
 }

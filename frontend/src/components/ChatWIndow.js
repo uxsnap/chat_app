@@ -3,20 +3,23 @@ import ChatNavbar from './ChatNavbar';
 import ChatMessages from './ChatMessages';
 
 export default ({
-  searchValue = '',
-  // addUser,
-  currentUser = null,
-  // users = [],
-  messages = [],
-  handleSearch,
-  deleteMessages,
-  deleteUsers,
-  addAsset,
-  messageValue = '',
-  makePhoto,
-  handleStickers,
-  handleMessageClick,
-  sendMessage
+  // searchValue = '',
+  // // addUser,
+  // currentUser = null,
+  // // users = [],
+  // messages = [],
+  // handleSearch,
+  // deleteMessages,
+  // deleteUsers,
+  // addAsset,
+  // messageValue = '',
+  // makePhoto,
+  // handleStickers,
+  // handleMessageClick,
+  handleAddMessage,
+  handleDeleteMessage,
+  handleEditMessage,
+  // sendMessage
 }) => {
   return (
     // TODO: add many users functionality
@@ -35,6 +38,8 @@ export default ({
       <div className="chat-window__main">
         <ChatMessages
           messages={messages}
+          editMessage={handleEditMessage}
+          deleteMessage={handleDeleteMessage}
           handleMessageClick={handleMessageClick}
         />
       </div>
@@ -44,7 +49,7 @@ export default ({
           messageValue={messageValue}
           makePhoto={makePhoto}
           handleStickers={handleStickers}
-          sendMessage={sendMessage}
+          sendMessage={handleAddMessage}
         />
       </div>
     </div>

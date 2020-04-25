@@ -3,6 +3,7 @@ const http      = require('http');
 const mongoose =  require('mongoose');
 const { resolve } = require('path');
 const dotenv = require('dotenv');
+
 dotenv.config();
 
 // Session
@@ -32,7 +33,9 @@ io.use((socket, next) => {
 // Express configuration
 app.use(sessionMiddleware);
 
-io.on('connection', (socket) => {
+const authIO = io.of('/auth');
+
+authIO.on('connection', (socket) => {
   authActions(socket);
 });
 

@@ -7,6 +7,10 @@ const UserSchema = new Schema({
   name: String,
   email: String,
   pass: String,
+  messages: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Message'
+  }],
   resetPassToken: String,
   resetPassExpires: Date
 });

@@ -9,15 +9,9 @@ const MessageSchema = new Schema({
     type: Schema.Types.ObjectId
     ref: 'Dialogue'
   },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  },
+  userId: Schema.Types.ObjectId,
   date: Date,
-  fromUser: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  }
+  fromUser: Schema.Types.ObjectId
 });
 
 

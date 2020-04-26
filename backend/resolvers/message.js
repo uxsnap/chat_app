@@ -1,20 +1,18 @@
 const Message = require('../models/Message');
 
-export const addMessage = async (userId, dialogueId, text) => {
-	 const message = new Message({
-		 user: userId,
-		 dialogue: dialogueId,
-		 text
-	 });
-	 
-	 try {
-		 await message.save();
-	 } catch (e) {
+export const addMessages = async (userId, dialogueId, messages = []) => {
+	try { 
+    await Message.insertMany({
+	  	 user: userId,
+		   dialogue: dialogueId,
+		   messages
+	   });
+	} catch (e) {
 		 res.message = 'Problems with saving the message';
 		 res.status = 500;
-	 }
+	}
 	 
-	 return res;
+  return res;
 }
 
 export const deleteMessage = async (messageId) => {

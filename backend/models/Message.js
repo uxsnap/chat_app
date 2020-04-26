@@ -10,10 +10,14 @@ const MessageSchema = new Schema({
     ref: 'Dialogue'
   },
   user: {
-    type: Schema.Tyeps.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User'
   },
   date: Date,
+  fromUser: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
 

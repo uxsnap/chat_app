@@ -16,7 +16,7 @@ export default ({
   // makePhoto,
   // handleStickers,
   // handleMessageClick,
-  handleAddMessage,
+  handleAddMessages,
   handleDeleteMessage,
   handleEditMessage,
   // sendMessage
@@ -49,7 +49,7 @@ export default ({
           messageValue={messageValue}
           makePhoto={makePhoto}
           handleStickers={handleStickers}
-          sendMessage={handleAddMessage}
+          sendMessage={handleAddMessages}
         />
       </div>
     </div>

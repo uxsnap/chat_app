@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { toggleLogged } from 'actions/authForm';
-import socket from 'helpers/api';
+// import socket from 'helpers/api';
 import Chat from 'containers/Chat';
 import VisibleAuthForm from 'containers/VisibleAuthForm';
 import VisibleResetPass from 'containers/VisibleResetPass';

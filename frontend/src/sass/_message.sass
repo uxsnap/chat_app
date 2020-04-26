@@ -1,0 +1,35 @@
+.message
+  &_current-user
+    .dialogue-item
+      margin-left: auto
+      background-color: $slightlyTextColor !important
+      &:before
+        transform: rotate(180deg)
+        right: -10px
+        left: unset !important
+        border-right: 10px solid $slightlyTextColor !important
+  &__control
+  .dialogue-item
+    background-color: $slightlyMainColor
+    cursor: default
+    width: 240px
+    position: relative
+    &:before
+      content: ''
+      display: block
+      border-top: 10px solid transparent
+      border-bottom: 10px solid transparent 
+      border-right: 10px solid $slightlyMainColor
+      position: absolute
+      left: -10px
+      // transform: rotate(-45deg)
+    &:hover
+      background-color: $slightlyMainColor
+    &__photo
+      width: 24px
+      height: 24px
+      align-self: flex-start
+      img
+        height: 24px
+        width: 24px
+

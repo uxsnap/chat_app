@@ -3,7 +3,7 @@ import Icon from './Icon';
 import ActionList from './ActionList';
 
 export default ({
-  lastSeen = new Date(),
+  lastSeen = null,
   searchValue,
   handleSearch,
   addUser,
@@ -15,11 +15,11 @@ export default ({
   return (
     <div className="chat-navbar">
       <div className="chat-navbar__main">
-        <div className="chat-navbar__name">{
-          currentUser.name
-        }</div>
+        <div className="chat-navbar__name">
+          { currentUser.name }
+        </div>
         <div className="chat-navbar__last-seen">
-        { lastSeen }
+          { lastSeen }
         </div>
       </div>
       <div className="chat-navbar__rest">

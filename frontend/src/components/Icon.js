@@ -1,6 +1,11 @@
 import React from 'react';
 
-export default ({ name }) => {
-  return <span className={"icon icon-" + name}></span>
+export default ({ name, onClick }) => {
+  return (
+    <span
+      onClick={onClick}
+      className={"icon icon-" + name}
+    ></span>
+  );
 }
 

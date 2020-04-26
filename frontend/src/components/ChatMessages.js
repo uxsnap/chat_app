@@ -6,20 +6,26 @@ export default ({
   messages = [],
   handleMessageClick
 }) => {
-  <ul className="chat-messages">{
-    messages.length
-      ? messages.map((message) => {
-          return (
-            <Message
-              key={'message_' + message.id}
-              message={message}
-              handleMessageClick={handleMessageClick}
-            />
-          );
-        })
-      : <div className="chat-messages__empty">
-        <Icon name="nomessages"/>
-      </div>
-  }
-  </ul>
+  return (
+    <ul className="chat-messages">{
+      messages.length
+        ? messages.map((message) => {
+            return (
+              <li
+                key={'message_' + message.id} 
+                className="chat-messages__message"
+              >
+                <Message
+                  message={message}
+                  handleMessageClick={handleMessageClick}
+                />
+              </li>
+            );
+          })
+        : <div className="chat-messages__empty">
+          <Icon name="nomessages"/>
+        </div>
+    }
+    </ul>
+  );
 }

@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import formatDate from 'helpers/formatDate';
 import capitalize from 'helpers/capitalize';
 import Input from 'components/Input';
+import DropDown from 'components/DropDown';
 import Icon from 'components/Icon';
 import DialogueItem from 'components/DialogueItem';
 
-export default ({
+const ChatList = ({
   dialogues,
-  searchValue,
+  foundUsers = [],
   chooseMessage,
-  setSearchValue,
-  currentDialogue
+  currentDialogue,
+  searchUsers,
+  openDialogue
 }) => {
+  const [curValue, setSearchValue] = useState('');
+
   const isEmpty = !dialogues.length;
   const dataToRender = () => dialogues
     .map((dialogue) => {
@@ -36,9 +40,18 @@ export default ({
         <Input
           className="chat-list__input"
           name="chatList"
-          value={searchValue}
+          value={curValue}
           icon="searchlogo"
-          onInput={(value) => setSearchValue(value)}
+          onInput={(value) => {
+            curValue.length > 3 && searchUsers(curValue);
+            setSearchValue(value);
+          }}
+        />
+        <DropDown 
+          className="chat-list__select"
+          items={foundUsers}
+          onClick={(item) => openDialogue(item)}
+          size={5}
         />
       </div>
       <div className="chat-list__main">
@@ -57,3 +70,5 @@ export default ({
     </div>
   );
 }
+
+export default ChatList;

@@ -2,7 +2,7 @@ import React from 'react';
 import Message from './Message';
 import Icon from './Icon';
 
-export default ({
+const ChatMessages = ({
   messages = [],
   handleMessageClick
 }) => {
@@ -29,3 +29,5 @@ export default ({
     </ul>
   );
 }
+
+export default ChatMessages;

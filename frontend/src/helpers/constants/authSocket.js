@@ -1,4 +1,4 @@
 import io from '../api';
 
-// export default io('/auth');
-export default () => {};
+export default io('/auth');
+// export default () => {};

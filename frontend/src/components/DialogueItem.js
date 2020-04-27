@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-export default ({
+const DialogueItem = ({
   modification = '',
   photo = 'img/default_photo.png',
   title,
@@ -41,3 +41,5 @@ export default ({
     </div>
   );
 }
+
+export default DialogueItem;

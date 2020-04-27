@@ -10,6 +10,7 @@ const initialState = {
     //   message: 'Hello'
     // }
   ],
+  foundUsers: [],
   currentDialogue: '',
   searchValue: ''
 };
@@ -17,10 +18,10 @@ const initialState = {
 export default (state = 
   initialState, action) => {
   switch (action.type) {
-    case 'SET_SEARCH_VALUE':
+    case 'FOUND_USERS':
       return {
         ...state,
-        searchValue: action.value
+        foundUsers: action.value
       }
     case 'ADD_DIALOGUE_ITEM':
       return {

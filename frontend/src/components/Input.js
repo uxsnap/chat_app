@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import Icon from 'components/Icon';
 
-export default ({ 
+const Input = ({ 
   type = 'text',
   value,
   title = '',
@@ -54,3 +54,5 @@ export default ({
     </label>
   );
 }
+
+export default Input;

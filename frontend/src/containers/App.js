@@ -14,9 +14,9 @@ import {
 const App = ({ isLogged }) => {
   return (
     <Switch>
-      // <Route path="/auth/forgot/:token" component={VisibleResetPass} />
-      // <Route path="/auth" component={VisibleAuthForm} />
-      <Route path="/" component={Chat}/>
+      {/*// <Route path="/auth/forgot/:token" component={VisibleResetPass} />*/}
+      <Route path="/auth" component={VisibleAuthForm} />
+      {/*<Route path="/" component={Chat}/>*/}
     </Switch>
   );
 }

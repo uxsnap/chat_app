@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({ name, onClick }) => {
+const Icon = ({ name, onClick }) => {
   return (
     <span
       onClick={onClick}
@@ -9,3 +9,4 @@ export default ({ name, onClick }) => {
   );
 }
 
+export default Icon;

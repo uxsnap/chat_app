@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import DialoguesService from 'services/DialoguesService';
 
 export const addDialogueItem = ({
   photo,
@@ -28,9 +29,18 @@ export const chooseMessage = ({
   id
 });
 
-export const setSearchValue = ({
+// ({
+//     type: "SEARCH_USERS",
+//     value
+//   });
+export const searchUsers = ({
   value
-}) => ({
-  type: "SET_SEARCH_VALUE",
-  value
-});
+}) => {
+  return async (dispatch) => {
+    const dialogue = new DialoguesService();
+    dispatch(
+      'FOUND_USERS',
+      await dialogue.searchUsers(value)
+    );
+  }
+}

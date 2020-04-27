@@ -26,6 +26,7 @@ const AuthForm = ({
         setError(res.message);
         return;
       }
+
       handleAuthAction(type);
     });
   }, []);

@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const UserValidator = require('../helpers/validators/UserValidator');
+const generateRandomPeer = require('../helpers/generateRandomPeer');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const sgMail = require('../helpers/sgMail');
@@ -85,7 +86,8 @@ async function handleReg(name, email, pass) {
 
     const user = {
       name, email,
-      pass: passHashed
+      pass: passHashed,
+      peerId: generateRandomPeer()
     };
 
     const found = await User.findByEmail(email);

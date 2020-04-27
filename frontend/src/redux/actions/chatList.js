@@ -22,25 +22,27 @@ export const removeDialogueItem = ({
   id
 });
 
-export const chooseMessage = ({
-  id
-}) => ({
+export const chooseMessage = (id) => ({
   type: 'SET_DIALOGUE_ACTIVE',
   id
 });
+
+export const addUsers = (users) => {
+  console.log(users);
+  return {
+    type: "ADD_USERS",
+    users
+  }
+};
 
 // ({
 //     type: "SEARCH_USERS",
 //     value
 //   });
-export const searchUsers = ({
-  value
-}) => {
+export const searchUsers = (value) => {
   return async (dispatch) => {
     const dialogue = new DialoguesService();
-    dispatch(
-      'FOUND_USERS',
-      await dialogue.searchUsers(value)
-    );
+    const res = await dialogue.searchUsers(value);
+    dispatch({type: ''});
   }
 }

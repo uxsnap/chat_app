@@ -17,6 +17,9 @@ const sessionMiddleware = session({
 })
 
 const authActions = require('./actions/authActions');
+const usersActions = require('./actions/usersActions');
+
+const connectStr = require('./helpers/connectStr');
 
 const app = express();
 const server = http.Server(app);
@@ -34,16 +37,15 @@ io.use((socket, next) => {
 app.use(sessionMiddleware);
 
 const authIO = io.of('/auth');
+const chatIO = io.of('/chat'); 
 
 authIO.on('connection', (socket) => {
   authActions(socket);
 });
 
-const connectStr = 'mongodb+srv://' +
-  process.env.DB_USER + ':' +
-  process.env.DB_PASS +
-  '@chatapp-pumsp.mongodb.net/test' +
-  '?retryWrites=true&w=majority';
+chatIO.on('connection', (socket) => {
+  usersActions(socket);
+})
 
 mongoose.set('useFindAndModify', false);
 mongoose

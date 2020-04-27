@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 import {
   updateField,
-  submitAuth
+  submitAuth,
+  handleAuthAction,
+  setError
 } from 'actions/authForm';
 import AuthService from 'services/AuthService';
 import AuthForm from 'components/AuthForm';

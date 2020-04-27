@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDebounce } from 'use-debounce';
 import formatDate from 'helpers/formatDate';
 import capitalize from 'helpers/capitalize';
 import Input from 'components/Input';
@@ -7,7 +8,9 @@ import Icon from 'components/Icon';
 import DialogueItem from 'components/DialogueItem';
 
 const ChatList = ({
+  socket,
   dialogues,
+  addUsers,
   foundUsers = [],
   chooseMessage,
   currentDialogue,
@@ -15,6 +18,14 @@ const ChatList = ({
   openDialogue
 }) => {
   const [curValue, setSearchValue] = useState('');
+  const [debouncedValue] = useDebounce(curValue, 100);
+
+  useEffect(() => {
+    socket.on('found_users', (res) => {
+      if (res.status === 200)
+        addUsers(res.users);
+    });
+  }, [foundUsers])
 
   const isEmpty = !dialogues.length;
   const dataToRender = () => dialogues
@@ -43,7 +54,7 @@ const ChatList = ({
           value={curValue}
           icon="searchlogo"
           onInput={(value) => {
-            curValue.length > 3 && searchUsers(curValue);
+            debouncedValue.length > 2 && searchUsers(debouncedValue);
             setSearchValue(value);
           }}
         />

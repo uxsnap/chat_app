@@ -18,10 +18,10 @@ const initialState = {
 export default (state = 
   initialState, action) => {
   switch (action.type) {
-    case 'FOUND_USERS':
+    case 'ADD_USERS':
       return {
         ...state,
-        foundUsers: action.value
+        foundUsers: action.users
       }
     case 'ADD_DIALOGUE_ITEM':
       return {

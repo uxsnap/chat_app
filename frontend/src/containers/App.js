@@ -16,7 +16,7 @@ const App = ({ isLogged }) => {
     <Switch>
       {/*// <Route path="/auth/forgot/:token" component={VisibleResetPass} />*/}
       <Route path="/auth" component={VisibleAuthForm} />
-      {/*<Route path="/" component={Chat}/>*/}
+      <Route path="/" component={Chat}/>
     </Switch>
   );
 }

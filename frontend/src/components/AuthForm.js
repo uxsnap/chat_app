@@ -1,5 +1,6 @@
 import React, {
-  useEffect
+  useEffect,
+  useState
 } from 'react';
 import PropTypes from 'prop-types';
 import Input from 'components/Input';
@@ -12,12 +13,10 @@ const AuthForm = ({
   pass = '',
   logo = '',
   error = '',
-  formType = 'login',
   updateField,
   submitAuth,
   handleAuthAction,
-  setError,
-  setFormType
+  setError
 }) => {
   useEffect(() => {
     socket.on('submitted', (data) => {
@@ -30,6 +29,8 @@ const AuthForm = ({
       handleAuthAction(type);
     });
   }, []);
+
+  const [formType, setFormType] = useState('login');
 
   return (
     <div className="auth-form">

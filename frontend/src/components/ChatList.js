@@ -21,11 +21,21 @@ const ChatList = ({
   const [debouncedValue] = useDebounce(curValue, 100);
 
   useEffect(() => {
+    console.log(debouncedValue);
     socket.on('found_users', (res) => {
       if (res.status === 200)
         addUsers(res.users);
     });
   }, [foundUsers])
+
+  function _prepareUsers(users) {
+    return users.map(user => {
+      return {
+        id: user.userId,
+        value: curValue.includes('@') ? '@' + user.peerId : user.name
+      }
+    });
+  }
 
   const isEmpty = !dialogues.length;
   const dataToRender = () => dialogues
@@ -54,13 +64,15 @@ const ChatList = ({
           value={curValue}
           icon="searchlogo"
           onInput={(value) => {
-            debouncedValue.length > 2 && searchUsers(debouncedValue);
+            value.length > 1
+             ? searchUsers(debouncedValue)
+             : addUsers([]);
             setSearchValue(value);
           }}
         />
         <DropDown 
           className="chat-list__select"
-          items={foundUsers}
+          items={_prepareUsers(foundUsers)}
           onClick={(item) => openDialogue(item)}
           size={5}
         />

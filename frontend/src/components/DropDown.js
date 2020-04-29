@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import Asset from 'components/Asset';
 
 const DropDown = ({
   items = [],
@@ -14,13 +15,16 @@ const DropDown = ({
 
   return (
     <ul className={dropDownClassNames}>
-      {items.slice(1, size).map((item, ind) => {
+      {items.slice(0, size).map((item, ind) => {
         return (
           <li 
             key={'drop-down__item_' + item.id}
             className="drop-down__item"
             onClick={onClick}
-          >{ item.value }</li>
+          >
+            <Asset src={item.photo ? item.photo : ''} dummy={item.value}/>
+            <span>{ item.value }</span>
+          </li>
         );
       })}
     </ul>

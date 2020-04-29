@@ -35,10 +35,6 @@ export const addUsers = (users) => {
   }
 };
 
-// ({
-//     type: "SEARCH_USERS",
-//     value
-//   });
 export const searchUsers = (value) => {
   return async (dispatch) => {
     const dialogue = new DialoguesService();

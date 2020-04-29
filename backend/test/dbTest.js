@@ -2,7 +2,17 @@ const faker = require("faker");
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const generateRandomPeer = require('../helpers/generateRandomPeer');
-const connectStr = require('../helpers/connectStr');
+const { resolve } = require('path');
+
+require('dotenv').config({
+  path: resolve('../.env')
+});
+
+const connectStr = 'mongodb+srv://' +
+  process.env.DB_USER + ':' +
+  process.env.DB_PASS +
+  '@' + process.env.DB_CLUSTER + '.mongodb.net/' + process.env.DB_NAME +
+  '?retryWrites=true&w=majority';
 
 console.log(connectStr);
 
@@ -24,7 +34,7 @@ const addUsers = async () => {
         name,
         pass: `${peer}123`,
         peerId: peer,
-        messages: [],
+        dialogues: [],
         resetPassToken: null,
         resetPassExpires: null
       };
@@ -43,4 +53,18 @@ const addUsers = async () => {
   }
 }
 
+const addDialogues = async () => {
+  try {
+    const dialogues = [];
+    const dQuan = 100;
+
+    for (let i = 0; i < dQuan; i++) {
+    }
+
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 addUsers();
+

@@ -3,6 +3,7 @@ export default (state = {
   name: '',
   email: '',
   pass: '',
+  userId: '',
   isSubmit: false,
   formType: 'login',
   type: 'form'

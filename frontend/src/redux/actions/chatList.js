@@ -35,6 +35,27 @@ export const addUsers = (users) => {
   }
 };
 
+export const addDialogues = (dialogues) => ({
+  type: "ADD_DIALOGUES",
+  dialogues
+})
+
+export const openDialogue = (userId, id) => {
+  return async (dispatch, getState) => {
+    const dialogue = new DialogueService();
+    const res  = await dialogue.openDialogue(userId, id);
+    dispatch({type: ''});
+  }
+}
+
+export const fetchDialogues = (userId) => {
+  return async (dispatch) => {
+    const dialogue =  new DialoguesService();
+    const res = await dialogue.fetchDialogues(userId);
+    dispatch({type: ''});
+  }
+}
+
 export const searchUsers = (value) => {
   return async (dispatch) => {
     const dialogue = new DialoguesService();

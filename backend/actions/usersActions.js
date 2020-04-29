@@ -1,5 +1,5 @@
 const {
-  handleUserSearch
+  handleUserSearch,
 } = require('../resolvers/users');
 
 module.exports = (socket) => {

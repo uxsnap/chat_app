@@ -25,7 +25,7 @@ const AuthForm = ({
         setError(res.message);
         return;
       }
-
+      if (res.id) updateField('userId', res.id);
       handleAuthAction(type);
     });
   }, []);

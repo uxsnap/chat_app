@@ -1,6 +1,7 @@
-const Dialogue = require('../models/Dialogue');
+const Dialogues = require('../models/Dialogues');
+const User = require('../models/User');
 
-export const addDialogue = async (users = [], messages = []) => {
+const addDialogue = async (users = [], messages = []) => {
 	 const dialogue = new Dialogue({
 		 users,
 		 messages
@@ -16,7 +17,7 @@ export const addDialogue = async (users = [], messages = []) => {
 	 return res;
 }
 
-export const deleteMessage = async (messageId) => {
+const deleteMessage = async (messageId) => {
   const res = {message: '', status: 200};
 
   try {
@@ -30,7 +31,7 @@ export const deleteMessage = async (messageId) => {
 };
 
 
-export const editMessage = async (messageId, text) => {
+const editMessage = async (messageId, text) => {
 	const res = {message: "", status: 200};
 	try {
 		await Message.findByIdAndUpdate(
@@ -44,4 +45,29 @@ export const editMessage = async (messageId, text) => {
 	}
 	
 	return res;
+}
+
+const fetchDialogues = async (userId) => {
+  const res = {
+    message: '',
+    status: 200,
+    dialogues: []
+  };
+  console.log(userId);
+  try {
+    const userDialogues = await User
+      .findById(userId)
+      .populate('dialogues');
+    res.dialogues = userDialogues;
+    console.log(userDialogues);
+  } catch (e) {
+    res.message = 'Problems with fetching the dialogues';
+    res.status = 500;
+  }
+
+  return res;
+}
+
+module.exports = {
+  fetchDialogues
 }

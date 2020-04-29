@@ -23,6 +23,12 @@ export default (state =
         ...state,
         foundUsers: action.users
       }
+    case 'ADD_DIALOGUES':
+      const { dialogues } = action;
+      return {
+        ...state,
+        dialogues
+      }
     case 'ADD_DIALOGUE_ITEM':
       return {
         ...state,

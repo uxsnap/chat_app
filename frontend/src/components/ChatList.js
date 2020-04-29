@@ -9,22 +9,39 @@ import DialogueItem from 'components/DialogueItem';
 
 const ChatList = ({
   socket,
+  // For testing purposes
+  // userId,
   dialogues,
   addUsers,
+  addDialogues,
   foundUsers = [],
   chooseMessage,
   currentDialogue,
   searchUsers,
+  fetchDialogues,
   openDialogue
 }) => {
+  const userId = '5ea6e3351f878110cceca7bc';
   const [curValue, setSearchValue] = useState('');
   const [debouncedValue] = useDebounce(curValue, 100);
+  
+  useEffect(() => {
+    async function compFetchDialogues() {
+      await fetchDialogues(userId);
+    }
+    compFetchDialogues();
+  }, [userId])
 
   useEffect(() => {
-    console.log(debouncedValue);
     socket.on('found_users', (res) => {
       if (res.status === 200)
         addUsers(res.users);
+    });
+
+    socket.on('fetched_dialogues', (res) => {
+       console.log(res);
+       if (res.status === 200)
+         addDialogues(res.dialogues);
     });
   }, [foundUsers])
 
@@ -62,7 +79,6 @@ const ChatList = ({
           className="chat-list__input"
           name="chatList"
           value={curValue}
-          icon="searchlogo"
           onInput={(value) => {
             value.length > 1
              ? searchUsers(debouncedValue)
@@ -73,7 +89,7 @@ const ChatList = ({
         <DropDown 
           className="chat-list__select"
           items={_prepareUsers(foundUsers)}
-          onClick={(item) => openDialogue(item)}
+          onClick={({id}) => openDialogue(userId, id)}
           size={5}
         />
       </div>

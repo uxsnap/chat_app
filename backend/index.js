@@ -18,6 +18,7 @@ const sessionMiddleware = session({
 
 const authActions = require('./actions/authActions');
 const usersActions = require('./actions/usersActions');
+const dialoguesActions = require('./actions/dialoguesActions');
 
 const connectStr = require('./helpers/connectStr');
 
@@ -45,6 +46,7 @@ authIO.on('connection', (socket) => {
 
 chatIO.on('connection', (socket) => {
   usersActions(socket);
+  dialoguesActions(socket);
 })
 
 mongoose.set('useFindAndModify', false);

@@ -8,11 +8,10 @@ const UserSchema = new Schema({
   email: String,
   pass: String,
   peerId: String,
-  messages: [{
+  dialogues: [{
     type: Schema.Types.ObjectId,
-    ref: 'Message'
+    ref: 'Dialogues'
   }],
-  dialogues: Array,
   resetPassToken: String,
   resetPassExpires: Date
 });

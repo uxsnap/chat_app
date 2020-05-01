@@ -3,6 +3,7 @@ import ChatNavbar from './ChatNavbar';
 import ChatMessages from './ChatMessages';
 import MessagePanel from './MessagePanel';
 import mario from 'assets/images/mario.png';
+import handleMessages from 'helpers/handleMessages';
 
 export default ({
   searchValue = '',
@@ -10,22 +11,7 @@ export default ({
   addUser,
   currentUser = null,
   users = [],
-  messages = [{
-    id: 1,
-    photo: mario,
-    name: 'Me',
-    date: new Date(),
-    message: "I'm heree!".repeat(40),
-    isMyMessage: true
-  },
-  {
-    id: 1,
-    photo: mario,
-    name: 'Not Me',
-    date: new Date(),
-    message: "I'm heree!",
-    isMyMessage: false
-  }],
+  messages = [],
   deleteMessages,
   deleteUsers,
   addAsset,
@@ -54,7 +40,7 @@ export default ({
       </div>
       <div className="chat-window__main">
         <ChatMessages
-          messages={messages}
+          messages={handleMessages(messages)}
           editMessage={handleEditMessage}
           deleteMessage={handleDeleteMessage}
           handleMessageClick={handleMessageClick}

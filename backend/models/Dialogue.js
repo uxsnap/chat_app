@@ -13,3 +13,5 @@ const DialogueSchema = new Schema({
 
 
 const Dialogue = model('Dialogue', DialogueSchema); 
+
+module.exports = Dialogue;

@@ -1,6 +1,10 @@
 import chatSocket from 'helpers/constants/chatSocket';
 
 class DialoguesService {
+  async openDialogue(userId, id) {
+    await chatSocket.emit('open_dialogue', JSON.stringify({ userId, id }));
+  }
+
   async searchUsers(value) {
     await chatSocket.emit('find_users', JSON.stringify({value}));
   }

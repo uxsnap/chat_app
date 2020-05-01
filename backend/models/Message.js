@@ -5,10 +5,7 @@ const { model, Schema } = require('mongoose');
 
 const MessageSchema = new Schema({
   text: String,
-  dialogue: {
-    type: Schema.Types.ObjectId
-    ref: 'Dialogue'
-  },
+  dialogueId: { type: Schema.Types.ObjectId, ref: 'Dialogues'},
   userId: Schema.Types.ObjectId,
   date: Date,
   fromUser: Schema.Types.ObjectId

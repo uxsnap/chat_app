@@ -3,3 +3,8 @@ export const handleSearch = (dialogueId, text) => ({
   dialogueId,
   text
 });
+
+export const openMessages = messages => ({
+  type: "OPEN_MESSAGES",
+  messages
+});

@@ -3,18 +3,7 @@ const mongoose = require("mongoose");
 const User = require("../models/User");
 const generateRandomPeer = require('../helpers/generateRandomPeer');
 const { resolve } = require('path');
-
-require('dotenv').config({
-  path: resolve('../.env')
-});
-
-const connectStr = 'mongodb+srv://' +
-  process.env.DB_USER + ':' +
-  process.env.DB_PASS +
-  '@' + process.env.DB_CLUSTER + '.mongodb.net/' + process.env.DB_NAME +
-  '?retryWrites=true&w=majority';
-
-console.log(connectStr);
+const connectStr = require('../helpers/connectStr');
 
 const addUsers = async () => {
   try {

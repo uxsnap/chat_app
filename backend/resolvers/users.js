@@ -4,11 +4,11 @@ const handleUserSearch = async (val) => {
   const res = { 
     status: 200,
     message: '',
-    users: []
+    data: { users: [] }
   };
   
   try {
-    res.users = await User.findByNameOrPeerId(val);
+    res.data.users = await User.findByNameOrPeerId(val);
   } catch (e) {
     res.status = 500;
     res.message = 'Problems with fetching the users';

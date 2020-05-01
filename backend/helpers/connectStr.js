@@ -1,9 +1,8 @@
 const { resolve } = require('path');
 
 require('dotenv').config({
-  path: resolve('../.env')
+  path: resolve('.env')
 });
-
 
 module.exports = 'mongodb+srv://' +
   process.env.DB_USER + ':' +

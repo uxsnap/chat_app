@@ -41,8 +41,8 @@ export const addDialogues = (dialogues) => ({
 })
 
 export const openDialogue = (userId, id) => {
-  return async (dispatch, getState) => {
-    const dialogue = new DialogueService();
+  return async (dispatch) => {
+    const dialogue = new DialoguesService();
     const res  = await dialogue.openDialogue(userId, id);
     dispatch({type: ''});
   }

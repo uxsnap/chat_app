@@ -9,6 +9,7 @@ import {
   openDialogue,
   fetchDialogues
 } from 'actions/chatList'; 
+import { openMessages } from 'actions/chatWindow';
 import ChatList from 'components/ChatList';
 import socket from 'helpers/constants/chatSocket';
 
@@ -34,7 +35,8 @@ const mapDispatchToProps = (dispatch) => ({
   chooseMessage: (id) => dispatch(chooseMessage(id)),
   setSearchValue: (value) => dispatch(setSearchValue(value)),
   searchUsers: (value) => dispatch(searchUsers(value)),
-  openDialogue: (userId, id) => dispatch(openDialogues(userId, id)),
+  openDialogue: (userId, id) => dispatch(openDialogue(userId, id)),
+  openMessages: (messages) => dispatch(openMessages(messages)),
   fetchDialogues: (userId) => dispatch(fetchDialogues(userId)),
   addUsers: (users) => dispatch(addUsers(users)),
   addDialogues: (dialouges) => dispatch(addDialogues(dialogues)),

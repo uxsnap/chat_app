@@ -19,7 +19,8 @@ const ChatList = ({
   currentDialogue,
   searchUsers,
   fetchDialogues,
-  openDialogue
+  openDialogue,
+  openMessages
 }) => {
   const userId = '5ea6e3351f878110cceca7bc';
   const [curValue, setSearchValue] = useState('');
@@ -35,13 +36,18 @@ const ChatList = ({
   useEffect(() => {
     socket.on('found_users', (res) => {
       if (res.status === 200)
-        addUsers(res.users);
+        addUsers(res.data.users);
     });
 
     socket.on('fetched_dialogues', (res) => {
-       console.log(res);
        if (res.status === 200)
-         addDialogues(res.dialogues);
+         addDialogues(res.data.dialogues);
+    });
+
+    socket.on('dialogue_opened', (res) => {
+      console.log(res);
+      if (res.status === 200)
+        openMessages(res.data.messages);
     });
   }, [foundUsers])
 

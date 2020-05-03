@@ -63,3 +63,5 @@ export const searchUsers = (value) => {
     dispatch({type: ''});
   }
 }
+
+export const clearUsers = () => ({type: "CLEAR_USERS"});

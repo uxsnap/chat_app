@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import Asset from './Asset';
 
 const DialogueItem = ({
   modification = '',
@@ -22,7 +23,7 @@ const DialogueItem = ({
       onClick={onClick}
     >
       <div className="dialogue-item__photo">
-        <img src={photo} alt="Photo"/>
+        <Asset src={photo}/>
       </div>
       <main className="dialogue-item__main">
         <header className="dialogue-item__header">

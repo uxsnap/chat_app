@@ -56,10 +56,9 @@ const fetchDialogues = async (userId) => {
     }
   };
   try {
-    const userDialogues = await User
-      .findById(userId)
-      .populate('dialogues');
-    res.dialogues = userDialogues;
+    const dialogues = await Dialogue
+      .find({fromUser: userId});
+    res.data.dialogues = dialogues;
   } catch (e) {
     res.message = 'Problems with fetching the dialogues';
     res.status = 500;
@@ -78,17 +77,28 @@ const openDialogue = async (userId, id) => {
   };
 
   try {
-    console.log(Dialogue);
     let dialogue = await Dialogue
-      .findById(userId);
+      .findOne({fromUser: userId, toUser: id});
+    
     if (!dialogue) {
       dialogue = new Dialogue({
         messages: [],
-        _id: userId
+        fromUser: userId,
+        toUser: id
       });
-      dialogue.save();
+      await dialogue.save();
     }
-    res.data = dialogue.populate('messages');
+    
+    const user = await User.findOne({_id: userId});
+    console.log(user);
+    res.data = dialogue
+      .populate('messages');
+    res.data.toUser = id;
+    res.data.fromUser = {
+      _id: userId,
+      name: user.name,
+      peerId: user.peerId
+    };
   } catch (e) {
     console.error(e);
     res.status = 500;

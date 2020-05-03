@@ -28,15 +28,16 @@ export default ({
     // TODO: add many users functionality
     <div className="chat-window">
       <div className="chat-window__header">
-        {/*<ChatNavbar
-          searchValue={searchValue}
+      { /*<ChatNavbar
+        searchValue={searchValue}
           handleSearch={handleSearch}
           addUser={addUser}
           users={users}
           currentUser={currentUser}
           deleteUsers={deleteUsers}
           deleteMessages={deleteMessages}
-        />*/}
+        />
+      */}
       </div>
       <div className="chat-window__main">
         <ChatMessages

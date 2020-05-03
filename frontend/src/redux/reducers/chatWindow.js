@@ -11,7 +11,11 @@ export default (state = initialState, action) => {
      case "OPEN_MESSAGES":
        return {
           ...state,
-         messages: action.messages
+         messages: action.messages,
+         toUser: action.toUser,
+         currentUser: action.currentUser
        }
+     default:
+       return state;
    }
 }

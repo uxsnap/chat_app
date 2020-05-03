@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import Asset from 'components/Asset';
+import Asset from './Asset';
 
 const DropDown = ({
   items = [],
@@ -20,7 +20,7 @@ const DropDown = ({
           <li 
             key={'drop-down__item_' + item.id}
             className="drop-down__item"
-            onClick={onClick}
+            onClick={() => onClick(item)}
           >
             <Asset src={item.photo ? item.photo : ''} dummy={item.value}/>
             <span>{ item.value }</span>

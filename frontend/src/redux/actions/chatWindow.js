@@ -4,7 +4,16 @@ export const handleSearch = (dialogueId, text) => ({
   text
 });
 
-export const openMessages = messages => ({
-  type: "OPEN_MESSAGES",
-  messages
-});
+export const openMessages = (messages, toUser) => {
+  return (dispatch, getState) => {
+    const { foundUsers } = getState().chatList;
+    const found = foundUsers.find(user => user.userId === toUser)
+    dispatch({
+      type: "OPEN_MESSAGES",
+      toUser,
+      messages,
+      currentUser: found
+    });
+  }
+};
+

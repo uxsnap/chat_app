@@ -11,45 +11,62 @@ const ChatList = ({
   socket,
   // For testing purposes
   // userId,
-  dialogues,
+  dialogues = [],
   addUsers,
   addDialogues,
   foundUsers = [],
   chooseMessage,
   currentDialogue,
   searchUsers,
+  clearUsers,
   fetchDialogues,
   openDialogue,
   openMessages
 }) => {
   const userId = '5ea6e3351f878110cceca7bc';
   const [curValue, setSearchValue] = useState('');
-  const [debouncedValue] = useDebounce(curValue, 100);
+  const [isOpened, setOpened] = useState(false);
+  const [debouncedValue] = useDebounce(curValue);
   
+  async function compFetchDialogues() {
+    await fetchDialogues(userId);
+  }
+
   useEffect(() => {
-    async function compFetchDialogues() {
-      await fetchDialogues(userId);
-    }
     compFetchDialogues();
   }, [userId])
 
   useEffect(() => {
     socket.on('found_users', (res) => {
-      if (res.status === 200)
+      if (res.status === 200) {
         addUsers(res.data.users);
+      }
     });
+  }, [foundUsers]);
 
+  useEffect(() => {
     socket.on('fetched_dialogues', (res) => {
-       if (res.status === 200)
-         addDialogues(res.data.dialogues);
+      const parsed = JSON.parse(res);
+      if (parsed.status === 200) {
+        addDialogues(parsed.data.dialogues);
+      }
     });
+  }, [dialogues]);
 
-    socket.on('dialogue_opened', (res) => {
-      console.log(res);
-      if (res.status === 200)
-        openMessages(res.data.messages);
+  useEffect(() => {
+    socket.on('dialogue_opened', async (res) => {
+      const parsed = JSON.parse(res);
+      const { status } = parsed;
+      const { messages, toUser } = parsed.data;
+      if (status === 200) {
+        openMessages(messages, toUser);
+        setSearchValue('');
+        clearUsers();
+        setOpened(true);
+        await compFetchDialogues();
+      }
     });
-  }, [foundUsers])
+  }, [isOpened])
 
   function _prepareUsers(users) {
     return users.map(user => {
@@ -63,17 +80,18 @@ const ChatList = ({
   const isEmpty = !dialogues.length;
   const dataToRender = () => dialogues
     .map((dialogue) => {
+    const { messages } = dialogue;
     return (
       <li className="chat-list__item">
         <DialogueItem
-          key={'chat-list__item_' + dialogue.id}
-          isActive={dialogue.id === currentDialogue}
+          key={'chat-list__item_' + dialogue._id}
+          isActive={dialogue._id === currentDialogue}
           modification="chat-list"
           photo={dialogue.photo}
           title={capitalize(dialogue.name)}
           subtitle={formatDate(dialogue.date)}
-          lastMessage={dialogue.message}
-          onClick={() => chooseMessage(dialogue.id)}          
+          lastMessage={messages[messages.length - 1]}
+          onClick={() => chooseMessage(dialogue._id)}          
         />
       </li>
     )
@@ -84,11 +102,11 @@ const ChatList = ({
         <Input
           className="chat-list__input"
           name="chatList"
-          value={curValue}
+          value={debouncedValue}
           onInput={(value) => {
             value.length > 1
-             ? searchUsers(debouncedValue)
-             : addUsers([]);
+              ? searchUsers(debouncedValue)
+              : addUsers([]);
             setSearchValue(value);
           }}
         />

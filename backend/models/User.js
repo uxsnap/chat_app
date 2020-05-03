@@ -10,7 +10,7 @@ const UserSchema = new Schema({
   peerId: String,
   dialogues: [{
     type: Schema.Types.ObjectId,
-    ref: 'Dialogues'
+    ref: 'Dialogue'
   }],
   resetPassToken: String,
   resetPassExpires: Date

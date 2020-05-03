@@ -23,7 +23,6 @@ const addUsers = async () => {
         name,
         pass: `${peer}123`,
         peerId: peer,
-        dialogues: [],
         resetPassToken: null,
         resetPassExpires: null
       };

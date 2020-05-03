@@ -7,7 +7,8 @@ import {
   addUsers,
   addDialogues,
   openDialogue,
-  fetchDialogues
+  fetchDialogues,
+  clearUsers
 } from 'actions/chatList'; 
 import { openMessages } from 'actions/chatWindow';
 import ChatList from 'components/ChatList';
@@ -36,10 +37,11 @@ const mapDispatchToProps = (dispatch) => ({
   setSearchValue: (value) => dispatch(setSearchValue(value)),
   searchUsers: (value) => dispatch(searchUsers(value)),
   openDialogue: (userId, id) => dispatch(openDialogue(userId, id)),
-  openMessages: (messages) => dispatch(openMessages(messages)),
+  openMessages: (toUser, messages) => dispatch(openMessages(toUser, messages)),
   fetchDialogues: (userId) => dispatch(fetchDialogues(userId)),
   addUsers: (users) => dispatch(addUsers(users)),
-  addDialogues: (dialouges) => dispatch(addDialogues(dialogues)),
+  addDialogues: (dialogues) => dispatch(addDialogues(dialogues)),
+  clearUsers: () => dispatch(clearUsers()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatList);

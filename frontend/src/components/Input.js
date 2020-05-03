@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import Icon from 'components/Icon';
 
 const Input = ({ 
   type = 'text',
-  value,
+  value = '',
   title = '',
   error = '',
   placeholder = 'Input something...',
@@ -13,7 +13,7 @@ const Input = ({
   name,
   onInput
 }) => {
-  const [stateValue, setValue] = useState(value || '');
+  const [stateValue, setValue] = useState(value);
   const id = name + 'Input';
   const isError = error.length;
   "input" + (isError ? 'input_error' : '')
@@ -22,6 +22,9 @@ const Input = ({
     'input_error': isError,
     [className]: true
   });
+
+  useEffect(() => setValue(value), [value]);
+  
   return (
     <label
       htmlFor={id}
@@ -36,6 +39,7 @@ const Input = ({
         type={type}
         name={name}
         id={id}
+        value={stateValue}
         placeholder={placeholder}
         onChange={($event) => {
           const curValue = $event.target.value;

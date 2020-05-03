@@ -23,6 +23,11 @@ export default (state =
         ...state,
         foundUsers: action.users
       }
+    case 'CLEAR_USERS':
+      return {
+        ...state,
+        foundUsers: []
+      }
     case 'ADD_DIALOGUES':
       const { dialogues } = action;
       return {

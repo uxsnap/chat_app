@@ -22,6 +22,7 @@ const addUsers = async () => {
         email: faker.internet.email(name),
         name,
         pass: `${peer}123`,
+        photo: '',
         peerId: peer,
         resetPassToken: null,
         resetPassExpires: null

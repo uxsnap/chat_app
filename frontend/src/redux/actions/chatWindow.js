@@ -17,3 +17,5 @@ export const openMessages = (messages, toUser) => {
   }
 };
 
+
+export const addAsset = () => ({});

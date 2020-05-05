@@ -3,7 +3,7 @@ import Button from './Button';
 import Input from './Input';
 import { useHistory } from 'react-router-dom'; 
 
-export default ({
+const ResetPass = ({
   token = null,
   title = '',
   logo = '',
@@ -49,3 +49,5 @@ export default ({
     </div>
   );
 }
+
+export default ResetPass;

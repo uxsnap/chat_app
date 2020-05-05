@@ -6,6 +6,7 @@ class DialoguesService {
   }
 
   async searchUsers(value) {
+    // TODO: Don't search for yourself
     await chatSocket.emit('find_users', JSON.stringify({value}));
   }
 

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Button from './Button';
 import Icon from './Icon';
+ 
 
-export default ({
+const MessagePanel = ({
   messageValue = '',
   addAsset,
   // makePhoto,
@@ -33,3 +34,5 @@ export default ({
     </div>
   );
 }
+
+export default MessagePanel;

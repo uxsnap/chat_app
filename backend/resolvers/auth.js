@@ -87,7 +87,8 @@ async function handleReg(name, email, pass) {
     const user = {
       name, email,
       pass: passHashed,
-      peerId: generateRandomPeer()
+      peerId: generateRandomPeer(),
+      photo: ''
     };
 
     const found = await User.findByEmail(email);

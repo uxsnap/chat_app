@@ -13,7 +13,7 @@ const DialogueItem = ({
 }) => {
   const dialogueClassnames = classNames({
     'dialogue-item': true,
-    [modification]: true,
+    ['dialogue-item_' + modification]: true,
     'dialogue-item_active': isActive
   });
 

@@ -8,6 +8,7 @@ const UserSchema = new Schema({
   email: String,
   pass: String,
   peerId: String,
+  photo: String,
   dialogues: [{
     type: Schema.Types.ObjectId,
     ref: 'Dialogue'

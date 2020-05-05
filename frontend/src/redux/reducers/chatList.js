@@ -1,15 +1,7 @@
 import mario from 'assets/images/mario.png';
 
 const initialState = {
-  dialogues: [
-    // {
-    //   id: 1,
-    //   name: 'me',
-    //   photo: mario,
-    //   date: new Date(),
-    //   message: 'Hello'
-    // }
-  ],
+  dialogues: [],
   foundUsers: [],
   currentDialogue: '',
   searchValue: ''

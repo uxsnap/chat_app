@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import Icon from './Icon';
 import ActionList from './ActionList';
+import Asset from './Asset';
 
-export default ({
+const ChatNavbar = ({
   lastSeen = null,
   searchValue,
   handleSearch,
   addUser,
-  users,
+  // users,
   currentUser,
-  deleteUsers,
+  // deleteUsers,
   deleteMessages
 }) => {
+  function _handleStatus(date) {
+    return date;
+  }
+
   return (
     <div className="chat-navbar">
       <div className="chat-navbar__main">
@@ -19,21 +24,23 @@ export default ({
           { currentUser.name }
         </div>
         <div className="chat-navbar__last-seen">
-          { lastSeen }
+          { lastSeen ? _handleStatus(lastSeen) : null }
         </div>
       </div>
       <div className="chat-navbar__rest">
         <div className="chat-navbar__search">
           <Icon name="searchlogo"/>
+          <Icon name=""/>
+          <div className="chat-navbar__other">
+            <ActionList/>
+          </div>
         </div>
-        // TODO: add action list
-        // <div className="chat-navbar__other">
-        //   <ActionList/>
-        // </div>
         <div className="chat-navbar__photo">
-          <img src={currentUser.photo} alt="user_photo"/>
+          <Asset src={currentUser.photo}/>
         </div>
       </div>
     </div>
   )
 }
+
+export default ChatNavbar;

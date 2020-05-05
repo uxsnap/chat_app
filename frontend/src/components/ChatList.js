@@ -23,7 +23,7 @@ const ChatList = ({
   openDialogue,
   openMessages
 }) => {
-  const userId = '5ea6e3351f878110cceca7bc';
+  const userId = '5eb16ecf1d3f89216f8061cd';
   const [curValue, setSearchValue] = useState('');
   const [isOpened, setOpened] = useState(false);
   const [debouncedValue] = useDebounce(curValue);
@@ -77,21 +77,33 @@ const ChatList = ({
     });
   }
 
+  function _checkDate(messages) {
+    if (!messages.length) return '';
+    return formatDate(messages[messages.length - 1].date);
+  }
+
+  function _checkLastMessage(messages) {
+    if (!messages.length) return 'There is no messages yet';
+    return messages[messages.length - 1];
+  }
+  
   const isEmpty = !dialogues.length;
   const dataToRender = () => dialogues
     .map((dialogue) => {
     const { messages } = dialogue;
     return (
-      <li className="chat-list__item">
+      <li 
+        className="chat-list__item"
+        key={'chat-list__item_' + dialogue.id}
+      >
         <DialogueItem
-          key={'chat-list__item_' + dialogue._id}
-          isActive={dialogue._id === currentDialogue}
+          isActive={dialogue.id === currentDialogue}
           modification="chat-list"
-          photo={dialogue.photo}
-          title={capitalize(dialogue.name)}
-          subtitle={formatDate(dialogue.date)}
-          lastMessage={messages[messages.length - 1]}
-          onClick={() => chooseMessage(dialogue._id)}          
+          photo={dialogue.user.photo}
+          title={capitalize(dialogue.user.name)}
+          subtitle={'01.02.1998'}
+          lastMessage={_checkLastMessage(messages)}
+          onClick={() => chooseMessage(dialogue.id)}          
         />
       </li>
     )

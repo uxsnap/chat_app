@@ -13,6 +13,7 @@ const ChatWindow = ({
   addUser,
   users = [],
   user = null,
+  curUserId = null,
   deleteUsers,
   deleteMessages,
   // Message
@@ -67,7 +68,7 @@ const ChatWindow = ({
           user &&
           <MessagePanel 
             addAsset={addAsset}
-            sendMessage={(message) => sendMessage(dialogueId, user.id, message)}
+            sendMessage={(message) => sendMessage(dialogueId, curUserId, message)}
           />
         }
           {/*makePhoto={makePhoto}

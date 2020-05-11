@@ -58,7 +58,7 @@ const fetchDialogues = async (userId) => {
   try {
     const dialogues = await Dialogue
       .find({fromUser: userId})
-      .populate('messages', 'message date');
+      .populate('messages', 'message date fromUser');
     const dialoguesWithUsers = [];
     for (const d of dialogues) {
       const u = await User.findById(d.toUser);
@@ -66,7 +66,7 @@ const fetchDialogues = async (userId) => {
         {
           toUser: d.toUser,
           fromUser: d.fromUser,
-          messages: d.messages,
+          messages: d.messages.map(m => ({date: m.date, message: d.message, isMyMessage: d.fromUser === userId}),
           id: d._id,
           user: { name: u.name, photo: u.photo}
         }
@@ -86,6 +86,7 @@ const openDialogue = async (userId, id) => {
     message: '',
     status: 200,
     data: {
+      dialogueId: null,
       messages: []
     }
   };
@@ -103,8 +104,7 @@ const openDialogue = async (userId, id) => {
       await dialogue.save();
     }
     
-    res.data = dialogue
-      .populate('messages');
+    res.data = dialogue.populate('messages');
     res.data.toUser = id;
     res.data.fromUser = userId;
   } catch (e) {
@@ -112,7 +112,6 @@ const openDialogue = async (userId, id) => {
     res.status = 500;
     res.message = 'Something went wrong';
   }
-
   return res;
 };
 

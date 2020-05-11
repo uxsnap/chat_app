@@ -8,7 +8,6 @@ module.exports = function(socket) {
   socket.on('open_dialogue', async (req) => {
     const { userId, id } = JSON.parse(req);
     const res = await openDialogue(userId, id);
-    console.log(res);
     socket.emit('dialogue_opened', JSON.stringify(res));
   });
 

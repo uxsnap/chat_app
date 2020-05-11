@@ -9,7 +9,7 @@ export const handleSearch = (dialogueId, text) => ({
 export const openMessages = (messages, toUser) => {
   return (dispatch, getState) => {
     const { foundUsers } = getState().chatList;
-    const found = foundUsers.find(user => user.userId === toUser)
+    const found = foundUsers.find(user => user.userId === toUser);
     dispatch({
       type: "OPEN_MESSAGES",
       toUser,

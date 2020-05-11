@@ -34,7 +34,6 @@ export const chooseMessage = (id) => {
 };
 
 export const addUsers = (users) => {
-  console.log(users);
   return {
     type: "ADD_USERS",
     users
@@ -44,7 +43,7 @@ export const addUsers = (users) => {
 export const addDialogues = (dialogues) => ({
   type: "ADD_DIALOGUES",
   dialogues
-})
+});
 
 export const openDialogue = (userId, id) => {
   return async (dispatch, getState) => {

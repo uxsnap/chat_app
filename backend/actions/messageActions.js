@@ -13,7 +13,6 @@ module.exports = function(socket) {
       message,
       new Date()
     );
-    // console.log(res);
     socket.emit('message:added', JSON.stringify(res));
   });
 }

@@ -14,7 +14,7 @@ module.exports = function(socket) {
       socket.request.session._id = _id;
       socket.request.session.save((err) => {
         if (err) {
-          console.log(err);
+          console.error(err);
         }
       });
     }

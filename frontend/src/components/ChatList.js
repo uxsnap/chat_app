@@ -84,7 +84,7 @@ const ChatList = ({
 
   function _checkLastMessage(messages) {
     if (!messages.length) return 'There is no messages yet';
-    return messages[messages.length - 1];
+    return messages[messages.length - 1].message;
   }
   
   const isEmpty = !dialogues.length;
@@ -102,7 +102,7 @@ const ChatList = ({
           photo={dialogue.user.photo}
           title={capitalize(dialogue.user.name)}
           subtitle={_checkDate(messages)}
-          lastMessage={_checkLastMessage(messages).message}
+          lastMessage={_checkLastMessage(messages)}
           onClick={() => chooseMessage(dialogue.id)}          
         />
       </li>

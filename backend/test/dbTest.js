@@ -35,7 +35,6 @@ const addUsers = async () => {
 
     User.insertMany(users, function(err, res) {
       if (err) console.error(err);
-      else console.log(res);
     });
   } catch (e) {
     console.error(e);

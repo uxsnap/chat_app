@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ChatNavbar from './ChatNavbar';
 import ChatMessages from './ChatMessages';
 import MessagePanel from './MessagePanel';
 import handleMessages from 'helpers/handleMessages';
 
 const ChatWindow = ({
+  // Dialogue
+  dialogueId = '',
   // Navbar
   searchValue = '',
   handleSearch,
@@ -15,13 +17,15 @@ const ChatWindow = ({
   deleteMessages,
   // Message
   messageValue = '',
-  addAsset
+  addAsset,
+  messages = [],
+  sendMessage,
+  socket,
   // searchValue = '',
   // handleSearch,
   // addUser,
   // currentUser = null,
   // users = [],
-  // messages = [],
   // deleteMessages,
   // deleteUsers,
   // addAsset,
@@ -51,18 +55,21 @@ const ChatWindow = ({
       }
       </div>
       <div className="chat-window__main">
-        { /*<ChatMessages
+        <ChatMessages
           messages={handleMessages(messages)}
-          editMessage={handleEditMessage}
-          deleteMessage={handleDeleteMessage}
-          handleMessageClick={handleMessageClick}
-        /> */}
+          // editMessage={handleEditMessage}
+          // deleteMessage={handleDeleteMessage}
+          // handleMessageClick={handleMessageClick}
+        />
       </div>
       <div className="chat-window__bottom">
-        <MessagePanel 
-          addAsset={addAsset}
-          messageValue={messageValue}
-        />
+        {
+          user &&
+          <MessagePanel 
+            addAsset={addAsset}
+            sendMessage={(message) => sendMessage(dialogueId, user.id, message)}
+          />
+        }
           {/*makePhoto={makePhoto}
           handleStickers={handleStickers}
           sendMessage={handleAddMessages}*/}

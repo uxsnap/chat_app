@@ -1,6 +1,36 @@
 const Message = require('../models/Message');
+const Dialogue = require('../models/Dialogue');
 
-export const addMessages = async (userId, dialogueId, messages = []) => {
+const addMessage = async (dialogueId, fromUser, message, date) => {
+  const res = {
+    status: 200,
+    message: '',
+  }
+  try {
+    const m = new Message({
+      dialogueId,
+      fromUser,
+      message,
+      date
+    });
+
+    await m.save();
+
+    await Dialogue.findByIdAndUpdate(
+      dialogueId,
+      { $push: { messages:  m._id  } },
+      {new: true, useFindAndModify: false}
+    );
+  } catch (e) {
+    console.error(e);
+    res.status = 500;
+    res.message = 'Problems with sending the message';
+  }
+
+  return res;
+}
+
+const addMessages = async (userId, dialogueId, messages = []) => {
 	try { 
     await Message.insertMany({
 	  	 user: userId,
@@ -15,7 +45,7 @@ export const addMessages = async (userId, dialogueId, messages = []) => {
   return res;
 }
 
-export const deleteMessage = async (messageId) => {
+const deleteMessage = async (messageId) => {
   const res = {message: '', status: 200};
 
   try {
@@ -29,7 +59,7 @@ export const deleteMessage = async (messageId) => {
 };
 
 
-export const editMessage = async (messageId, text) => {
+const editMessage = async (messageId, text) => {
 	const res = {message: "", status: 200};
 	try {
 		await Message.findByIdAndUpdate(
@@ -43,4 +73,9 @@ export const editMessage = async (messageId, text) => {
 	}
 	
 	return res;
+}
+
+
+module.exports = {
+  addMessage
 }

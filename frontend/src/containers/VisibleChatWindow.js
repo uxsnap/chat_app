@@ -6,31 +6,35 @@ import {
   addUser,
   deleteUsers,
   deleteMessages,
+  sendMessage
 } from 'actions/chatWindow';
 import socket from 'helpers/constants/chatSocket';
 
-const mapStateToProps = (state) => {
+const mapState = (state) => {
   const {
     currentDialogue,
     dialogues
   } = state.chatList;
 
-  const { messageValue } = state.chatWindow;
+  const { messageValue, messages } = state.chatWindow;
   const curDialogue = dialogues.find(d => d.id === currentDialogue);
   return {
-    messages: curDialogue ? curDialogue.messages : [],
+    socket,
+    dialogueId: currentDialogue,
+    messages,
     user: curDialogue ? { id: curDialogue.toUser, ...curDialogue.user} : null,
     socket,
     messageValue
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatch = (dispatch) => ({
   handleSearch: (value) => dispatch(handleSearch(value)),
   addUser: () => dispatch(addUser()),
   deleteUsers: () => dispatch(deleteUsers()),
   deleteMessages: () => dispatch(deleteMessages()),
-  addAsset: () => dispatch(addAsset())
+  addAsset: () => dispatch(addAsset()),
+  sendMessage: (dialogueId, fromUser, value) => dispatch(sendMessage(dialogueId, fromUser, value))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChatWindow);
+export default connect(mapState, mapDispatch)(ChatWindow);

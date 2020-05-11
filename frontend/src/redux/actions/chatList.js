@@ -22,10 +22,16 @@ export const removeDialogueItem = ({
   id
 });
 
-export const chooseMessage = (id) => ({
-  type: 'SET_DIALOGUE_ACTIVE',
-  id
-});
+export const chooseMessage = (id) => {
+  return (dispatch, getState) => {
+    dispatch({ type: 'SET_DIALOGUE_ACTIVE', id });
+    const { messages } = getState().chatList.dialogues.find(d => d.id === id);
+    dispatch({
+      type: 'MESSAGES',
+      messages
+    });
+  }
+};
 
 export const addUsers = (users) => {
   console.log(users);
@@ -41,10 +47,14 @@ export const addDialogues = (dialogues) => ({
 })
 
 export const openDialogue = (userId, id) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     const dialogue = new DialoguesService();
-    const res  = await dialogue.openDialogue(userId, id);
-    dispatch({type: ''});
+    await dialogue.openDialogue(userId, id);
+    const { messages } = getState().dialogues.find(d => d.id === id);
+    dispatch({
+      type: 'MESSAGES',
+      messages
+    });
   }
 }
 

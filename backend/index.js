@@ -3,6 +3,8 @@ const http      = require('http');
 const mongoose =  require('mongoose');
 const { resolve } = require('path');
 const dotenv = require('dotenv');
+const fs = require('fs');
+const path = require('path');
 
 dotenv.config();
 
@@ -19,6 +21,7 @@ const sessionMiddleware = session({
 const authActions = require('./actions/authActions');
 const usersActions = require('./actions/usersActions');
 const dialoguesActions = require('./actions/dialoguesActions');
+const messageActions = require('./actions/messageActions');
 
 const connectStr = require('./helpers/connectStr');
 
@@ -47,6 +50,7 @@ authIO.on('connection', (socket) => {
 chatIO.on('connection', (socket) => {
   usersActions(socket);
   dialoguesActions(socket);
+  messageActions(socket);
 })
 
 mongoose.set('useFindAndModify', false);
@@ -59,7 +63,6 @@ mongoose
     }
   )
   .then(() => {
-    console.log('Connected to MONGO');
     server.listen(process.env.PORT, () => console.log('listening.'));
   })
   .catch(err => console.log(err));

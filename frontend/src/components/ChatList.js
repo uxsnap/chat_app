@@ -101,8 +101,8 @@ const ChatList = ({
           modification="chat-list"
           photo={dialogue.user.photo}
           title={capitalize(dialogue.user.name)}
-          subtitle={'01.02.1998'}
-          lastMessage={_checkLastMessage(messages)}
+          subtitle={_checkDate(messages)}
+          lastMessage={_checkLastMessage(messages).message}
           onClick={() => chooseMessage(dialogue.id)}          
         />
       </li>

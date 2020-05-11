@@ -3,7 +3,8 @@ import DialogueItem from './DialogueItem';
 import Icon from './Icon';
 import formatDate from 'helpers/formatDate';
 
-export default ({
+
+const Message = ({
   message = null
 }) => {
   return (
@@ -27,3 +28,5 @@ export default ({
     </div>
   );
 }
+
+export default Message;

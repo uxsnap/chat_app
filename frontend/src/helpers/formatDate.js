@@ -1,9 +1,10 @@
 export default (date) => {
   if (!date) return '';
+  const dated = new Date(date);
   const [year, month, day] = [
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDate()
+    dated.getFullYear(),
+    dated.getMonth(),
+    dated.getDate()
   ]
-  return `${year}-${month}-${day}`;
+  return `${day}-${month}-${month}`;
 }

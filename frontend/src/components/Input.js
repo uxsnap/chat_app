@@ -11,7 +11,8 @@ const Input = ({
   className = '',
   icon = '',
   name,
-  onInput
+  onInput,
+  onClick
 }) => {
   const [stateValue, setValue] = useState(value);
   const id = name + 'Input';
@@ -48,7 +49,7 @@ const Input = ({
         }}
       />
       {icon.length
-        ? <span className="input__icon"><Icon name={icon}/></span>
+        ? <span className="input__icon"><Icon name={icon} onClick={onClick}/></span>
         : ''
       }
       {isError

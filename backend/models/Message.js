@@ -4,11 +4,9 @@ const { model, Schema } = require('mongoose');
 // const defaultResponse = require('../helpers/defaultResponse');
 
 const MessageSchema = new Schema({
-  text: String,
-  dialogueId: { type: Schema.Types.ObjectId, ref: 'Dialogues'},
-  userId: Schema.Types.ObjectId,
-  date: Date,
-  fromUser: Schema.Types.ObjectId
+  fromUser: Schema.Types.ObjectId,
+  message: String,
+  date: Date
 });
 
 

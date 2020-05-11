@@ -1,11 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
 import Asset from './Asset';
+import Icon from './Icon';
 
 const DropDown = ({
   items = [],
   className,
   onClick,
+  icon = '',
   size = 10
 }) => {
   const dropDownClassNames = classNames({
@@ -21,8 +23,14 @@ const DropDown = ({
             key={'drop-down__item_' + item.id}
             className="drop-down__item"
             onClick={() => onClick(item)}
-          >
-            <Asset src={item.photo ? item.photo : ''} dummy={item.value}/>
+          >  
+          {item.icon && item.icon.length
+            ? <Icon name={item.icon}/>
+            : <Asset
+              src={item.photo ? item.photo : ''}
+              dummy={item.value}
+            />
+          }
             <span>{ item.value }</span>
           </li>
         );

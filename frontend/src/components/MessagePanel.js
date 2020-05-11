@@ -4,13 +4,12 @@ import Icon from './Icon';
  
 
 const MessagePanel = ({
-  messageValue = '',
   addAsset,
+  sendMessage
   // makePhoto,
   // handleStickers,
-  // sendMessage
 }) => {
-  const [value, setMessageValue] = useState(messageValue);
+  const [value, setMessageValue] = useState('');
   return (
     <div className="message-panel">
       {/* TODO Add options panel */}
@@ -26,7 +25,7 @@ const MessagePanel = ({
       <div className="message-panel__send">
         <Button
           className="primary"
-          onClick={() => sendMessage(value)}
+          onClick={() => value.length && sendMessage(value) && setMessageValue('')}
         >
           <Icon name="mainlogo"/>
         </Button>

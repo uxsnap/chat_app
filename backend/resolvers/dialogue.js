@@ -57,7 +57,8 @@ const fetchDialogues = async (userId) => {
   };
   try {
     const dialogues = await Dialogue
-      .find({fromUser: userId});
+      .find({fromUser: userId})
+      .populate('messages', 'message date');
     const dialoguesWithUsers = [];
     for (const d of dialogues) {
       const u = await User.findById(d.toUser);

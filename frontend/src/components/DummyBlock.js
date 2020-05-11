@@ -1,7 +1,7 @@
 import React from 'react';
 import Icon from './Icon';
 
-const DefaultDummyBlock = ({ icon, info }) => {
+const DummyBlock = ({ icon, info }) => {
   return (
     <div className="dummy-block">
       <div className="dummy-block__icon">
@@ -14,6 +14,4 @@ const DefaultDummyBlock = ({ icon, info }) => {
   );
 }
 
-export const DummyBlock = styled(DefaultDummyBlock)`
-  color: grey;
-`
+export default DummyBlock;

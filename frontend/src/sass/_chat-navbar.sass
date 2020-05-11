@@ -2,8 +2,10 @@
   display: flex
   align-items: center
   justify-content: space-between
-  padding: 15px
+  padding: 8px 12px
   background-color: $slightlyMainColor
+  min-height: 50px
+  box-sizing: border-box
   .icon
     cursor: pointer
   &__rest
@@ -14,3 +16,18 @@
     margin-left: 15px
   &__name
     font-size: 14px
+  &__other
+    margin-left: 15px
+  &__search
+    .input
+      &__input
+        border: 0
+        padding: 9px 10px
+        border-radius: 7px
+        font-size: 13px
+        padding-right: 24px
+      &__icon
+        right: 5px
+        height: auto
+        .icon::before
+          transform: rotate(45deg)

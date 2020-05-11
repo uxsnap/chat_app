@@ -1,16 +1,17 @@
 import chatSocket from 'helpers/constants/chatSocket';
 
-export default class {
+class ChatService {
   constructor(dialogueId) {
     this.socket = chatSocket; 
     this.dialogueId = dialogueId;
   }
 
-  async addMessage(text) {
-    return await this.socket.emit('addMessage', 
+  async sendMessage(fromUser, message) {
+    return await this.socket.emit('message:send', 
       JSON.stringify({
         dialogueId: this.dialogueId,
-        text
+        fromUser,
+        message
       })
     );
   }
@@ -34,3 +35,5 @@ export default class {
     )
   }
 }
+
+export default ChatService;

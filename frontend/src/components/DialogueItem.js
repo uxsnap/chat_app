@@ -4,7 +4,7 @@ import Asset from './Asset';
 
 const DialogueItem = ({
   modification = '',
-  photo = 'img/default_photo.png',
+  photo = '',
   title,
   subtitle = '',
   isActive,

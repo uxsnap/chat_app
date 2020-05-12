@@ -1,3 +1,5 @@
+import addZeros from './addZeros';
+
 export default (date) => {
   if (!date) return '';
   const dated = new Date(date);
@@ -8,6 +10,6 @@ export default (date) => {
     dated.getHours(),
     dated.getMinutes(),
     dated.getSeconds()
-  ]
+  ].map(d => addZeros(d));
   return `${h}:${m}:${s}, ${day}-${month}-${year}`;
 }

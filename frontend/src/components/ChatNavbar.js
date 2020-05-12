@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDebounce } from 'use-debounce'; 
 import Icon from './Icon';
 import Input from './Input';
 import ActionList from './ActionList';
@@ -20,6 +21,11 @@ const ChatNavbar = ({
 
   const [isSearch, setSearch] = useState(false);
   const [searchVal, setSearchVal] = useState('');
+  const [debouncedValue] = useDebounce(searchVal, 100);
+
+  useEffect(() => {
+    handleSearch(debouncedValue);
+  }, [debouncedValue])
 
   return (
     <div className="chat-navbar">
@@ -36,9 +42,12 @@ const ChatNavbar = ({
           {isSearch &&
             <Input 
               icon="plus"
-              onClick={() => setSearch(false)}
+              onClick={() => {
+                setSearch(false);
+                handleSearch('');
+              }}
               value={searchVal}
-              onInput={(value) => handleSearch(value)}
+              onInput={(value) => setSearchVal(value)}
             />
             }
           {!isSearch && 

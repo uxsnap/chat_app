@@ -61,7 +61,7 @@ const ChatWindow = ({
       </div>
       <div className="chat-window__main">
         <ChatMessages
-          messages={handleMessages(messages)}
+          messages={handleMessages(messages, searchValue)}
           // editMessage={handleEditMessage}
           // deleteMessage={handleDeleteMessage}
           // handleMessageClick={handleMessageClick}

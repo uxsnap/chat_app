@@ -6,7 +6,6 @@ import Asset from './Asset';
 
 const ChatNavbar = ({
   lastSeen = null,
-  searchValue,
   handleSearch,
   addUser,
   // users,
@@ -19,7 +18,8 @@ const ChatNavbar = ({
     return date;
   }
 
-  const [isSearch, setSearch] = useState(false); 
+  const [isSearch, setSearch] = useState(false);
+  const [searchVal, setSearchVal] = useState('');
 
   return (
     <div className="chat-navbar">
@@ -34,9 +34,18 @@ const ChatNavbar = ({
       <div className="chat-navbar__rest">
         <div className="chat-navbar__search">
           {isSearch &&
-            <Input icon="plus" onClick={() => setSearch(false)}/>}
+            <Input 
+              icon="plus"
+              onClick={() => setSearch(false)}
+              value={searchVal}
+              onInput={(value) => handleSearch(value)}
+            />
+            }
           {!isSearch && 
-            <Icon name="searchlogo" onClick={() => setSearch(true)}/>}
+            <Icon name="searchlogo" onClick={() => {
+              setSearch(true);
+              handleSearch('');
+            }}/>}
         </div>
         {actions &&
           <div className="chat-navbar__other">

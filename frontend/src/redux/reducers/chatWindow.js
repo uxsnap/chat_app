@@ -25,6 +25,11 @@ export default (state = initialState, action) => {
        ...state,
        messages: action.messages
      }
+   case "HANDLE_SEARCH":
+     return {
+       ...state,
+       searchValue: action.text
+     }
    default:
      return state;
  }

@@ -16,7 +16,7 @@ const mapState = (state) => {
     dialogues
   } = state.chatList;
 
-  const { messageValue, messages } = state.chatWindow;
+  const { messageValue, messages, searchValue } = state.chatWindow;
   const curDialogue = dialogues.find(d => d.id === currentDialogue);
   return {
     socket,
@@ -25,7 +25,8 @@ const mapState = (state) => {
     curUserId: curDialogue ? curDialogue.fromUser : null, 
     user: curDialogue ? { id: curDialogue.toUser, ...curDialogue.user} : null,
     socket,
-    messageValue
+    messageValue,
+    searchValue
    }
 }
 

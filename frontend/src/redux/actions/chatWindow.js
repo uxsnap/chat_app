@@ -1,9 +1,8 @@
 import ChatService from 'services/ChatService';
 import { setLastMessage } from 'actions/chatList';
 
-export const handleSearch = (dialogueId, text) => ({
+export const handleSearch = (text) => ({
   type: "HANDLE_SEARCH",
-  dialogueId,
   text
 });
 

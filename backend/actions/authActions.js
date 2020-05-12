@@ -38,4 +38,8 @@ module.exports = function(socket) {
     const res = await handleChangePass(token, pass);
     socket.emit('passChanged', JSON.stringify(res));
   });
+
+  socket.on('sendCookies', async (data) => {
+    console.log(data);
+  });
 }

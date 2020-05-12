@@ -5,6 +5,8 @@ import React, {
 import PropTypes from 'prop-types';
 import Input from 'components/Input';
 import Button from 'components/Button';
+import { useHistory } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 const AuthForm = ({
   socket,
@@ -18,14 +20,26 @@ const AuthForm = ({
   handleAuthAction,
   setError
 }) => {
+  const [_, setCookie] = useCookies(['user_id']);
+  const history = useHistory();
+
   useEffect(() => {
     socket.on('submitted', (data) => {
-      const { res, type } = JSON.parse(data);
+      const { res, type, _id } = JSON.parse(data);
       if (res.status !== 200) {
         setError(res.message);
         return;
+      } else {
+        switch (type) {
+          case 'REGISTRATION':
+            setFormType('login');
+          case 'LOGIN':
+            history.push('/');
+            updateField('userId', _id);
+            setCookie('user_id', _id);
+         // TODO: Forgot pass 
+        }
       }
-      if (res.id) updateField('userId', res.id);
       handleAuthAction(type);
     });
   }, []);

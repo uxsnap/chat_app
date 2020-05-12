@@ -20,13 +20,15 @@ const mapStateToProps = (state) => {
     currentDialogue,
     foundUsers
   } = state.chatList;
+
   const { userId } = state.authForm;
   return {
     socket,
     dialogues,
     userId,
     currentDialogue,
-    foundUsers
+    foundUsers,
+    userId
   }
 }
 

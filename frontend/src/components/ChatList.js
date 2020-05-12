@@ -21,9 +21,9 @@ const ChatList = ({
   clearUsers,
   fetchDialogues,
   openDialogue,
-  openMessages
+  openMessages,
+  userId
 }) => {
-  const userId = '5eb16ecf1d3f89216f8061cd';
   const [curValue, setSearchValue] = useState('');
   const [isOpened, setOpened] = useState(false);
   const [debouncedValue] = useDebounce(curValue, 100);

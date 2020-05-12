@@ -6,12 +6,13 @@ class ChatService {
     this.dialogueId = dialogueId;
   }
 
-  async sendMessage(fromUser, message) {
+  async sendMessage(fromUser, message, date) {
     return await this.socket.emit('message:send', 
       JSON.stringify({
         dialogueId: this.dialogueId,
         fromUser,
-        message
+        message,
+        date
       })
     );
   }

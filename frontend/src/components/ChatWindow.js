@@ -21,7 +21,7 @@ const ChatWindow = ({
   addAsset,
   messages = [],
   sendMessage,
-  socket,
+  socket
   // searchValue = '',
   // handleSearch,
   // addUser,
@@ -39,6 +39,10 @@ const ChatWindow = ({
   // handleEditMessage,
   // sendMessage
 }) => {
+  function windowSendMessage(message) {
+    sendMessage(dialogueId, curUserId, message);
+  }
+
   return (
     // TODO: add many users functionality
     <div className="chat-window">
@@ -68,7 +72,7 @@ const ChatWindow = ({
           user &&
           <MessagePanel 
             addAsset={addAsset}
-            sendMessage={(message) => sendMessage(dialogueId, curUserId, message)}
+            sendMessage={(message) => windowSendMessage(message)}
           />
         }
           {/*makePhoto={makePhoto}

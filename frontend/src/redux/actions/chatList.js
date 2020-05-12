@@ -1,26 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import DialoguesService from 'services/DialoguesService';
 
-export const addDialogueItem = ({
-  photo,
-  name,
-  date,
-  lastMessage
-}) => ({
-  type: 'ADD_DIALOGUE_ITEM',
-  id: uuidv4(),
-  photo,
-  name,
-  date,
-  message: lastMessage
-});
-
-export const removeDialogueItem = ({
-  id
-}) => ({
-  type: 'REMOVE_DIALOGUE_ITEM',
-  id
-});
 
 export const chooseMessage = (id) => {
   return (dispatch, getState) => {
@@ -72,5 +52,11 @@ export const searchUsers = (value) => {
     dispatch({type: ''});
   }
 }
+
+export const setLastMessage = (dialogueId, lastMessage) => ({
+  type: "SET_LAST_MESSAGE",
+  dialogueId,
+  lastMessage
+})
 
 export const clearUsers = () => ({type: "CLEAR_USERS"});

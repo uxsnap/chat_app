@@ -1,4 +1,5 @@
 import ChatService from 'services/ChatService';
+import { setLastMessage } from 'actions/chatList';
 
 export const handleSearch = (dialogueId, text) => ({
   type: "HANDLE_SEARCH",
@@ -19,17 +20,21 @@ export const openMessages = (messages, toUser) => {
   }
 };
 
-export const sendMessage = (dialogueId, fromUser, message) => {
+export const sendMessage = (dialogueId, fromUser, mes) => {
   const chatService = new ChatService(dialogueId);
   return async (dispatch) => {
-    await chatService.sendMessage(fromUser, message);
+    const date = new Date();
+    await chatService.sendMessage(fromUser, mes, date);
+    const message = {
+      message: mes,
+      date,
+      isMyMessage: true
+    };
     dispatch({
       type: 'MESSAGE',
-      message: {
-        message,
-        isMyMessage: true
-      }
-    })    
+      message
+    });
+    dispatch(setLastMessage(dialogueId, message));   
   }
 }
 

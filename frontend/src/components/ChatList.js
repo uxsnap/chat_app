@@ -77,20 +77,21 @@ const ChatList = ({
     });
   }
 
-  function _checkDate(messages) {
-    if (!messages.length) return '';
-    return formatDate(messages[messages.length - 1].date);
+  function _checkDate(message) {
+    if (!message) return '';
+    return formatDate(message.date);
   }
 
-  function _checkLastMessage(messages) {
-    if (!messages.length) return 'There is no messages yet';
-    return messages[messages.length - 1].message;
+  function _checkLastMessage(message) {
+    if (!message) return 'There is no messages yet';
+    return message.message;
   }
   
   const isEmpty = !dialogues.length;
   const dataToRender = () => dialogues
     .map((dialogue) => {
-    const { messages } = dialogue;
+    const { messages, lastMessage } = dialogue;
+    console.log(lastMessage);
     return (
       <li 
         className="chat-list__item"
@@ -101,8 +102,8 @@ const ChatList = ({
           modification="chat-list"
           photo={dialogue.user.photo}
           title={capitalize(dialogue.user.name)}
-          subtitle={_checkDate(messages)}
-          lastMessage={_checkLastMessage(messages)}
+          subtitle={_checkDate(lastMessage)}
+          lastMessage={_checkLastMessage(lastMessage)}
           onClick={() => chooseMessage(dialogue.id)}          
         />
       </li>

@@ -26,7 +26,7 @@ const mapState = (state) => {
     user: curDialogue ? { id: curDialogue.toUser, ...curDialogue.user} : null,
     socket,
     messageValue
-  }
+   }
 }
 
 const mapDispatch = (dispatch) => ({

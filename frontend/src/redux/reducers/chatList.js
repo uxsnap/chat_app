@@ -46,6 +46,15 @@ export default (state =
       )
     case 'SET_DIALOGUE_ACTIVE':
       return { ...state, currentDialogue: action.id } 
+    case 'SET_LAST_MESSAGE':
+      return {
+        ...state,
+        dialogues: state.dialogues.map(d => {
+          if (d.id === action.dialogueId)
+            d.lastMessage = action.lastMessage;
+          return d;
+        })
+      }
     default:
       return state;
   }

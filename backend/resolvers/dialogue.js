@@ -58,19 +58,25 @@ const fetchDialogues = async (userId) => {
   try {
     const dialogues = await Dialogue
       .find({fromUser: userId})
-      .populate('messages', 'message date fromUser');
+      .populate('messages', 'message date fromUser _id');
     const dialoguesWithUsers = [];
     for (const d of dialogues) {
       const u = await User.findById(d.toUser);
-      dialoguesWithUsers.push(
-        {
-          toUser: d.toUser,
-          fromUser: d.fromUser,
-          messages: d.messages.map(m => ({date: m.date, message: d.message, isMyMessage: d.fromUser === userId}),
-          id: d._id,
-          user: { name: u.name, photo: u.photo}
-        }
-      );
+      const mappedMessages = d.messages.map(m => ({
+        date: m.date,
+        message: m.message, 
+        isMyMessage: m.fromUser + '' === userId + '',
+        id: m._id
+      }));
+      const lastMessage = mappedMessages[mappedMessages.length - 1];
+      dialoguesWithUsers.push({
+        toUser: d.toUser,
+        fromUser: d.fromUser,
+        messages: mappedMessages,
+        lastMessage: lastMessage ? lastMessage : null,
+        id: d._id,
+        user: { name: u.name, photo: u.photo}
+      });
     }
     res.data.dialogues = await Promise.all(dialoguesWithUsers);
   } catch (e) {

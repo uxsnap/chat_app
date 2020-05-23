@@ -6,7 +6,8 @@ const Asset = ({src, isIcon = false, dummy = 'Dummy'}) => {
     <div className="asset">
      { isIcon
        ? <Icon name={src}/> 
-       : (src && src.length ? <img src={src} /> : <div className="asset__dummy">{dummy[0].toUpperCase()}</div>)
+       : (src && 
+            src.length ? <img src={src} /> : <div className="asset__dummy">{dummy[0].toUpperCase()}</div>)
      }
     </div>
   );

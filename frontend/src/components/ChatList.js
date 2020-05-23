@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDebounce } from 'use-debounce';
 import formatDate from 'helpers/formatDate';
 import capitalize from 'helpers/capitalize';
+import useSocket from 'helpers/useSocket';
 import Input from 'components/Input';
 import DropDown from 'components/DropDown';
 import Icon from 'components/Icon';
@@ -34,7 +35,7 @@ const ChatList = ({
 
   useEffect(() => {
     compFetchDialogues();
-  }, [userId])
+  }, [userId]);
 
   useEffect(() => {
     socket.on('found_users', (res) => {
